@@ -7,8 +7,6 @@
     android:background="@color/background"
     tools:context="Ui.HomeActivity">
 
-
-
     <FrameLayout
         android:background="@color/white"
         android:id="@+id/nav_fragment"
@@ -18,8 +16,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
     </FrameLayout>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:background="@drawable/menu_bg"
         android:id="@+id/bottomNav"
