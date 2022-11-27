@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.maya.R
 import com.example.maya.Ui.Fragments.CartFragment
 import com.example.maya.Ui.Fragments.HomeFragment
-import com.example.maya.Ui.Fragments.LikeFragment
+import com.example.maya.Ui.Fragments.OrdersFragment
 import com.example.maya.Ui.Fragments.ProfileFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -31,12 +31,6 @@ class HomeActivity: AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
                     .commit()
                 return true
             }
-//            R.id.shopMenu -> {
-//                val fragment = ShopFragment()
-//                supportFragmentManager.beginTransaction().replace(R.id.nav_fragment, fragment, fragment.javaClass.simpleName)
-//                    .commit()
-//                return true
-//            }
             R.id.cartMenu -> {
                 val fragment = CartFragment()
                 supportFragmentManager.beginTransaction().replace(R.id.nav_fragment, fragment, fragment.javaClass.simpleName)
@@ -44,7 +38,7 @@ class HomeActivity: AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
                 return true
             }
             R.id.likeMenu -> {
-                val fragment = LikeFragment()
+                val fragment = OrdersFragment()
                 supportFragmentManager.beginTransaction().replace(R.id.nav_fragment, fragment, fragment.javaClass.simpleName)
                     .commit()
                 return true

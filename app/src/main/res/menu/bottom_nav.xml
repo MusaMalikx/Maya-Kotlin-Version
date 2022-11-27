@@ -5,18 +5,14 @@
         android:id="@+id/homeMenu"
         android:title="Home"
         android:icon="@drawable/ic_home"/>
-<!--    <item-->
-<!--        android:id="@+id/shopMenu"-->
-<!--        android:title="Shop"-->
-<!--        android:icon="@drawable/ic_shopping_cart"/>-->
     <item
         android:id="@+id/cartMenu"
         android:title="Cart"
-        android:icon="@drawable/ic_bag"/>
+        android:icon="@drawable/ic_shopping_cart"/>
     <item
         android:id="@+id/likeMenu"
-        android:title="Likes"
-        android:icon="@drawable/ic_fav"/>
+        android:title="Orders"
+        android:icon="@drawable/ic_bag"/>
     <item
         android:id="@+id/profileMenu"
         android:title="Profile"

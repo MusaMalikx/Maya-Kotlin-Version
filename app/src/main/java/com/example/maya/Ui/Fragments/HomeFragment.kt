@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.AdapterView
 import android.widget.LinearLayout
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -30,6 +31,7 @@ class HomeFragment: Fragment() {
     lateinit var newLayout: LinearLayout
     lateinit var saleLayout:LinearLayout
     lateinit var animationView: LottieAnimationView
+    lateinit var cardView: CardView
     lateinit var viewpager: ViewPager2
 
     override fun onCreateView(
@@ -44,6 +46,7 @@ class HomeFragment: Fragment() {
         newLayout = view.findViewById(R.id.newLayout)
         saleRecView = view.findViewById(R.id.saleRecView)
         saleLayout = view.findViewById(R.id.saleLayout)
+        cardView = view.findViewById(R.id.card_view)
         animationView = view.findViewById(R.id.animationView)
 
         newProduct = arrayListOf()
@@ -58,18 +61,17 @@ class HomeFragment: Fragment() {
 
         Handler().postDelayed({
             showLayout()
-        }, 3000)
+        }, 2000)
 
         return view
 
     }
 
     fun initializingCarousel(view: View){
-        var arr: ArrayList<Int> = arrayListOf(R.drawable.one,R.drawable.two,R.drawable.three,R.drawable.four,R.drawable.five)
+        var arr: ArrayList<Int> = arrayListOf(R.drawable.landscape1,R.drawable.landscape2,R.drawable.landscape3,R.drawable.landscape4,R.drawable.landscape5,R.drawable.landscape6)
+
         viewpager = view.findViewById(R.id.viewpager)
-
         viewpager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
-
         viewpager.adapter = CarouselAdapter(view.context, arr)
     }
 
@@ -112,6 +114,7 @@ class HomeFragment: Fragment() {
 //        coverRecView.visibility = View.GONE
         newLayout.visibility = View.GONE
         saleLayout.visibility = View.GONE
+        cardView.visibility = View.GONE
         animationView.visibility = View.VISIBLE
     }
     private fun showLayout(){
@@ -121,6 +124,7 @@ class HomeFragment: Fragment() {
 //        coverRecView.visibility = View.VISIBLE
         newLayout.visibility = View.VISIBLE
         saleLayout.visibility = View.VISIBLE
+        cardView.visibility = View.VISIBLE
     }
 
 }

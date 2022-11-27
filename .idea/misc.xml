@@ -4,8 +4,36 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2085" />
+        <entry key="app/src/main/res/drawable/btn_bg.xml" value="0.1155" />
+        <entry key="app/src/main/res/drawable/btn_bg2.xml" value="0.1155" />
+        <entry key="app/src/main/res/drawable/circle_bg.xml" value="0.1155" />
+        <entry key="app/src/main/res/drawable/edit_text_bg.xml" value="0.1155" />
+        <entry key="app/src/main/res/drawable/ic_american_express.xml" value="0.1155" />
+        <entry key="app/src/main/res/drawable/ic_back.xml" value="0.1155" />
+        <entry key="app/src/main/res/drawable/ic_bag.xml" value="0.1155" />
+        <entry key="app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.1155" />
+        <entry key="app/src/main/res/drawable/ic_baseline_clear_24.xml" value="0.1155" />
+        <entry key="app/src/main/res/drawable/ic_baseline_keyboard_arrow_right_24.xml" value="0.1155" />
+        <entry key="app/src/main/res/drawable/ic_baseline_more_vert_24.xml" value="0.1155" />
+        <entry key="app/src/main/res/drawable/ic_baseline_remove_24.xml" value="0.1155" />
+        <entry key="app/src/main/res/drawable/ic_card.xml" value="0.1155" />
+        <entry key="app/src/main/res/drawable/ic_check.xml" value="0.1155" />
+        <entry key="app/src/main/res/drawable/ic_credit_card.xml" value="0.1155" />
+        <entry key="app/src/main/res/drawable/ic_diners_club.xml" value="0.1155" />
+        <entry key="app/src/main/res/drawable/ic_discover.xml" value="0.1155" />
+        <entry key="app/src/main/res/drawable/ic_email.xml" value="0.1155" />
+        <entry key="app/src/main/res/drawable/ic_fav.xml" value="0.1155" />
+        <entry key="app/src/main/res/drawable/ic_home.xml" value="0.1155" />
+        <entry key="app/src/main/res/drawable/ic_jcb.xml" value="0.1155" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.2085" />
         <entry key="app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_mastercard.xml" value="0.1155" />
+        <entry key="app/src/main/res/drawable/ic_profile.xml" value="0.1155" />
+        <entry key="app/src/main/res/drawable/ic_search.xml" value="0.1155" />
+        <entry key="app/src/main/res/drawable/ic_shopping_cart.xml" value="0.1155" />
+        <entry key="app/src/main/res/drawable/ic_success.xml" value="0.1155" />
+        <entry key="app/src/main/res/drawable/ic_unionpay.xml" value="0.1155" />
+        <entry key="app/src/main/res/drawable/ic_visa.xml" value="0.1155" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.4054306030273438" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.10174560546875" />
@@ -14,11 +42,12 @@
         <entry key="app/src/main/res/layout/fragment_add_to_cart.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_cart.xml" value="0.20819396972656257" />
         <entry key="app/src/main/res/layout/fragment_fav.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.4326889038085937" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_likes.xml" value="0.14336372847011145" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/item_carousel.xml" value="0.29375" />
+        <entry key="app/src/main/res/layout/item_carousel.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_cart.xml" value="0.2947916666666667" />
-        <entry key="app/src/main/res/layout/item_product.xml" value="0.3018109940951115" />
+        <entry key="app/src/main/res/layout/item_product.xml" value="0.31813354492187507" />
         <entry key="app/src/main/res/menu/botom_nav.xml" value="0.24259259259259258" />
         <entry key="app/src/main/res/menu/bottom_nav.xml" value="0.1" />
       </map>

@@ -44,8 +44,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="15dp"
-            android:src="@drawable/ic_fav"
-            app:tint="@color/mainText" />
+            android:src="@drawable/ic_baseline_add_shopping_cart_24"
+            app:tint="@color/primary" />
 
     </LinearLayout>
 

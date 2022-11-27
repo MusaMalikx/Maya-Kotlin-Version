@@ -1,6 +1,7 @@
 package com.example.maya.Ui.Fragments
 
 import android.os.Bundle
+import android.os.Handler
 
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -30,6 +31,10 @@ class CartFragment : Fragment() {
     lateinit var cartRecView:RecyclerView
     lateinit var checkoutBtn:Button
 
+    lateinit var animationViewMain: LottieAnimationView
+    lateinit var bottomCartLayout:LinearLayout
+    lateinit var emptyCartLayout:LinearLayout
+    lateinit var cartTotalText:TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,16 +50,43 @@ class CartFragment : Fragment() {
 
         cartRecView = view.findViewById(R.id.cart_recycler_view)
         animationView = view.findViewById(R.id.animationViewCartPage)
+        animationViewMain = view.findViewById(R.id.animationView)
         totalPriceBagFrag = view.findViewById(R.id.total_price)
         checkoutBtn = view.findViewById(R.id.cart_checkout)
 
         cartProduct = arrayListOf()
 
-        val bottomCartLayout:LinearLayout = view.findViewById(R.id.bottomCartLayout)
-        val emptyBagMsgLayout:LinearLayout = view.findViewById(R.id.emptyCartMsgLayout)
-        val MybagText:TextView = view.findViewById(R.id.cart_text)
+        bottomCartLayout = view.findViewById(R.id.bottomCartLayout)
+        emptyCartLayout = view.findViewById(R.id.emptyCartMsgLayout)
+        cartTotalText = view.findViewById(R.id.cart_text)
 
         insertProducts()
+
+        hideLayout()
+
+        Handler().postDelayed({
+            showLayout()
+            animationView.playAnimation()
+            animationView.loop(true)
+            bottomCartLayout.visibility = View.GONE
+            cartTotalText.visibility = View.GONE
+            emptyCartLayout.visibility = View.VISIBLE
+
+            if (cartProduct.size == 0){
+                animationView.playAnimation()
+                animationView.loop(true)
+                bottomCartLayout.visibility = View.GONE
+                cartTotalText.visibility = View.GONE
+                emptyCartLayout.visibility = View.VISIBLE
+
+            }
+            else{
+                emptyCartLayout.visibility = View.GONE
+                bottomCartLayout.visibility = View.VISIBLE
+                cartTotalText.visibility = View.VISIBLE
+                animationView.pauseAnimation()
+            }
+        }, 2000)
 
         cartRecView.layoutManager = LinearLayoutManager(view.context,
             LinearLayoutManager.VERTICAL, false)
@@ -62,32 +94,30 @@ class CartFragment : Fragment() {
         cartAdapter = CartAdapter(cartProduct, view.context )
         cartRecView.adapter = cartAdapter
 
-        animationView.playAnimation()
-        animationView.loop(true)
-        bottomCartLayout.visibility = View.GONE
-        MybagText.visibility = View.GONE
-        emptyBagMsgLayout.visibility = View.VISIBLE
-
-        if (cartProduct.size == 0){
-            animationView.playAnimation()
-            animationView.loop(true)
-            bottomCartLayout.visibility = View.GONE
-            MybagText.visibility = View.GONE
-            emptyBagMsgLayout.visibility = View.VISIBLE
-
-        }
-        else{
-            emptyBagMsgLayout.visibility = View.GONE
-            bottomCartLayout.visibility = View.VISIBLE
-            MybagText.visibility = View.VISIBLE
-            animationView.pauseAnimation()
-        }
-
         checkoutBtn.setOnClickListener {
             Toast.makeText(view.context, "Checkout Coming Soon!", Toast.LENGTH_SHORT).show()
         }
 
         return view
+    }
+
+    private fun hideLayout(){
+        animationViewMain.playAnimation()
+        animationViewMain.loop(true)
+        checkoutBtn.visibility = View.GONE
+        cartRecView.visibility = View.GONE
+        bottomCartLayout.visibility = View.GONE
+        cartTotalText.visibility = View.GONE
+        animationViewMain.visibility = View.VISIBLE
+    }
+    private fun showLayout(){
+        animationViewMain.visibility = View.GONE
+        animationViewMain.playAnimation()
+        checkoutBtn.visibility = View.VISIBLE
+        cartRecView.visibility = View.VISIBLE
+        bottomCartLayout.visibility = View.VISIBLE
+        cartTotalText.visibility = View.VISIBLE
+
     }
 
     fun insertProducts() {

@@ -63,7 +63,7 @@ class ProductAdapter(private val productList: ArrayList<ProductModel>, context: 
     inner class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
 
         val productImage_singleProduct:ImageView = itemView.findViewById(R.id.productImage_singleProduct)
-        val productAddToFav_singleProduct:ImageView = itemView.findViewById(R.id.productAddToFav_singleProduct)
+//        val productAddToFav_singleProduct:ImageView = itemView.findViewById(R.id.productAddToFav_singleProduct)
         val productRating_singleProduct:RatingBar = itemView.findViewById(R.id.productRating_singleProduct)
         val productBrandName_singleProduct:TextView = itemView.findViewById(R.id.productBrandName_singleProduct)
         val discountTv_singleProduct:TextView = itemView.findViewById(R.id.discountTv_singleProduct)
