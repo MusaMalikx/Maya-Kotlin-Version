@@ -11,9 +11,10 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.10174560546875" />
         <entry key="app/src/main/res/layout/activity_product.xml" value="0.37285156249999996" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_add_to_cart.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_cart.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_fav.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.4326889038085937" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_carousel.xml" value="0.29375" />
         <entry key="app/src/main/res/layout/item_product.xml" value="0.3018109940951115" />

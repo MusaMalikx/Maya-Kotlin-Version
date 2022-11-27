@@ -18,7 +18,7 @@ class LikeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view =  inflater.inflate(R.layout.fragment_fav, container, false)
+        val view =  inflater.inflate(R.layout.fragment_likes, container, false)
 
 
         animationView = view.findViewById(R.id.animationViewLikePage)
