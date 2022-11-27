@@ -1,25 +1,29 @@
 package com.example.maya.Ui
 
 import android.os.Bundle
+import android.view.View
 import android.view.WindowManager
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.maya.R
+import com.example.maya.Ui.Adapters.ProductAdapter
+import com.example.maya.Ui.Models.ProductModel
 
-class ProductActivity: AppCompatActivity() {
+class ProductActivity: AppCompatActivity(), View.OnClickListener {
 
-    var productIndex: Int = -1
-    lateinit var ProductFrom: String
-//    private lateinit var cartViewModel: CartViewModel
-    private val TAG = "TAG"
-    lateinit var productImage_ProductDetailsPage: ImageView
-    lateinit var backIv_ProfileFrag: ImageView
-    lateinit var productName_ProductDetailsPage: TextView
-    lateinit var productPrice_ProductDetailsPage: TextView
-    lateinit var productBrand_ProductDetailsPage: TextView
-    lateinit var productDes_ProductDetailsPage: TextView
-    lateinit var RatingProductDetails: TextView
-    lateinit var productRating_singleProduct: RatingBar
+    lateinit var recommendProduct:ArrayList<ProductModel>
+    lateinit var recommendProductAdapter: ProductAdapter
+    lateinit var recommendRecView: RecyclerView
+
+    lateinit var productImage: ImageView
+    lateinit var productName:TextView
+    lateinit var productBrand:TextView
+    lateinit var productPrice:TextView
+    lateinit var productDes:TextView
+    lateinit var product:ProductModel
+    lateinit var productBackArrow: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,23 +31,60 @@ class ProductActivity: AppCompatActivity() {
 
         getWindow()?.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
+        product = intent.getSerializableExtra("product") as ProductModel
 
-        productIndex = intent.getIntExtra("ProductIndex", -1)
-        ProductFrom = intent.getStringExtra("ProductFrom").toString()
+        recommendProduct = arrayListOf()
+        recommendRecView = findViewById(R.id.recommended_recycler_view)
 
-        productImage_ProductDetailsPage = findViewById(R.id.productImage_ProductDetailsPage)
-        productName_ProductDetailsPage = findViewById(R.id.productName_ProductDetailsPage)
-        productPrice_ProductDetailsPage = findViewById(R.id.productPrice_ProductDetailsPage)
-        productBrand_ProductDetailsPage = findViewById(R.id.productBrand_ProductDetailsPage)
-        productDes_ProductDetailsPage = findViewById(R.id.productDes_ProductDetailsPage)
-        productRating_singleProduct = findViewById(R.id.productRating_singleProduct)
-        RatingProductDetails = findViewById(R.id.RatingProductDetails)
-//        RecomRecView_ProductDetailsPage = findViewById(R.id.RecomRecView_ProductDetailsPage)
-        backIv_ProfileFrag = findViewById(R.id.backIv_ProfileFrag)
-        val addToCart_ProductDetailsPage: Button = findViewById(R.id.addToCart_ProductDetailsPage)
-        val shippingAddress_productDetailsPage: LinearLayout =
-            findViewById(R.id.shippingAddress_productDetailsPage)
-        val cardNumberProduct_Details: TextView = findViewById(R.id.cardNumberProduct_Details)
+        productBackArrow = findViewById(R.id.product_backarrow)
+        productImage = findViewById(R.id.product_image)
+        productName = findViewById(R.id.product_name)
+        productBrand = findViewById(R.id.product_brand)
+        productPrice = findViewById(R.id.product_price)
+        productDes = findViewById(R.id.product_des)
+
+        productBackArrow.setOnClickListener(this)
+        productImage.setImageResource(product.productImage)
+        productName.text = product.productName
+        productBrand.text = product.productBrand
+        productPrice.text = "$"+product.productPrice
+        productDes.text = product.productDes
+
+        insertProducts()
+
+        recommendRecView.layoutManager = LinearLayoutManager(this,
+            LinearLayoutManager.HORIZONTAL, false)
+        recommendRecView.setHasFixedSize(true)
+        recommendProductAdapter = ProductAdapter(recommendProduct, this )
+        recommendRecView.adapter = recommendProductAdapter
+
     }
 
+    override fun onClick(v: View?) {
+        when (v!!.id) {
+            R.id.product_backarrow -> { super.onBackPressed(); }
+//            R.id.register_click -> { registerClick() }
+            else -> return
+        }
     }
+
+    fun insertProducts() {
+        val p1 = ProductModel(
+            "Coat",
+            "1",
+            "231",
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea co",
+            0.0F,
+            "0",
+            false,
+            "levis",
+            R.drawable.eight,
+            "Coats",
+            "Best of the best stichings"
+        )
+        recommendProduct.add(p1)
+        recommendProduct.add(p1)
+        recommendProduct.add(p1)
+        recommendProduct.add(p1)
+    }
+}

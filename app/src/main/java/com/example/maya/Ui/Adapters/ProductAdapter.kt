@@ -60,7 +60,7 @@ class ProductAdapter(private val productList: ArrayList<ProductModel>, context: 
          return productList.size
     }
 
-    public class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
+    inner class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
 
         val productImage_singleProduct:ImageView = itemView.findViewById(R.id.productImage_singleProduct)
         val productAddToFav_singleProduct:ImageView = itemView.findViewById(R.id.productAddToFav_singleProduct)
@@ -76,8 +76,10 @@ class ProductAdapter(private val productList: ArrayList<ProductModel>, context: 
 
     private fun goDetailsPage(position: Int) {
         val intent = Intent(ctx , ProductActivity::class.java)
+        intent.putExtra("image",  productList[position].productImage)
         intent.putExtra("ProductIndex", position)
         intent.putExtra("ProductFrom", "New")
+        intent.putExtra("product", productList[position])
         ctx.startActivity(intent)
     }
 }

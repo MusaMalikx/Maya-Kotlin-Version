@@ -1,6 +1,7 @@
 package com.example.maya.Ui.Models
 
 import androidx.lifecycle.ViewModel
+import java.io.Serializable
 
 data class ProductModel(
     val productName:String = "",
@@ -14,5 +15,5 @@ data class ProductModel(
     val productImage:Int = 0,
     val productCategory:String = "",
     val productNote:String = "",
-): ViewModel() {
+): ViewModel(), Serializable {
  }
