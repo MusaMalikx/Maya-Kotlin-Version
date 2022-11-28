@@ -55,7 +55,8 @@
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.40829694323144106" />
         <entry key="app/src/main/res/layout/item_carousel.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_cart.xml" value="0.2947916666666667" />
-        <entry key="app/src/main/res/layout/item_order.xml" value="0.49935316946959896" />
+        <entry key="app/src/main/res/layout/item_order.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/item_orders.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/item_product.xml" value="0.31813354492187507" />
         <entry key="app/src/main/res/menu/botom_nav.xml" value="0.24259259259259258" />
         <entry key="app/src/main/res/menu/bottom_nav.xml" value="0.1" />

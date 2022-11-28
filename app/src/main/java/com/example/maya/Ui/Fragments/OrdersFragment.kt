@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
@@ -28,6 +29,7 @@ class OrdersFragment : Fragment() {
     lateinit var orderRecView: RecyclerView
 
     lateinit var orderText: TextView
+    lateinit var orderCard:CardView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,6 +43,7 @@ class OrdersFragment : Fragment() {
         animationViewMain = view.findViewById(R.id.animationView)
         emptyOrderMsgLayout = view.findViewById(R.id.emptyOrderMsgLayout)
         orderText = view.findViewById(R.id.order_text)
+        orderCard = view.findViewById(R.id.orders_card)
 
 //        orderProduct = ViewModelProvider(this)[OrderModel::class.java]
         orderProduct = arrayListOf()
@@ -58,6 +61,7 @@ class OrdersFragment : Fragment() {
 
         orderRecView.visibility = View.GONE
         orderText.visibility = View.GONE
+        orderCard.visibility = View.GONE
         emptyOrderMsgLayout.visibility = View.GONE
         animationViewMain.visibility = View.VISIBLE
         animationViewMain.playAnimation()
@@ -73,6 +77,7 @@ class OrdersFragment : Fragment() {
             if (orderProduct.size == 0){
                 animationView.playAnimation()
                 animationView.loop(true)
+                orderCard.visibility = View.GONE
                 orderRecView.visibility = View.GONE
                 orderText.visibility = View.GONE
 
@@ -82,6 +87,7 @@ class OrdersFragment : Fragment() {
                 animationView.playAnimation()
                 animationView.loop(true)
                 emptyOrderMsgLayout.visibility = View.GONE
+                orderCard.visibility = View.VISIBLE
                 orderRecView.visibility = View.VISIBLE
                 orderText.visibility = View.VISIBLE
             }
