@@ -1,50 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardBackgroundColor="@color/backgroundAd"
-    app:cardElevation="0dp"
-    app:cardCornerRadius="10dp"
-    android:layout_marginRight="5dp"
-    android:layout_marginLeft="5dp"
-    android:layout_marginBottom="5dp"
-    android:layout_marginTop="5dp"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_marginBottom="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <ImageView
-            android:id="@+id/categoryImage_CateSingle"
+        <androidx.cardview.widget.CardView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:src="@drawable/order_bg"
+            android:layout_height="120dp"
+            app:cardCornerRadius="10dp"
+            android:layout_margin="5dp"
+            app:cardBackgroundColor="@color/backgroundAd"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent" >
 
-        </ImageView>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/order_number"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:fontFamily="@font/metropolis_regular"
-            android:maxLines="2"
-            android:text="Order #123454364"
-            android:textColor="@color/mainText"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/categoryImage_CateSingle" />
+                <ImageView
+                    android:id="@+id/order_image"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/bn"
+                    android:scaleType="centerCrop"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_gravity="center"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/order_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Name"
+                        android:textSize="18sp"
+                        android:maxLines="1"
+                        android:textColor="@color/mainText"
+                        android:fontFamily="@font/metropolis_semibold"
+                        android:maxEms="12"/>
 
+                    <TextView
+                        android:id="@+id/order_price"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Price"
+                        android:textSize="14sp"
+                        android:textColor="@color/primary"
+                        android:fontFamily="@font/metropolis_semibold"
+                        />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:orientation="horizontal"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="Quantity:"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:textColor="@color/mainText"
+                            android:textSize="18sp"
+                            android:fontFamily="@font/metropolis_regular"
+                            />
+                        <TextView
+                            android:id="@+id/order_quantity"
+                            android:layout_width="50dp"
+                            android:layout_height="match_parent"
+                            android:text="14"
+                            android:gravity="center"
+                            android:textColor="@color/mainText"
+                            android:textSize="18sp"
+                            android:fontFamily="@font/metropolis_regular"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
 </androidx.cardview.widget.CardView>

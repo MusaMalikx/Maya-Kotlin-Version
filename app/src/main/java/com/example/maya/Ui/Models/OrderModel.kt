@@ -1,10 +1,13 @@
 package com.example.maya.Ui.Models
 
+import android.widget.ImageView
 import androidx.lifecycle.ViewModel
-import java.io.Serializable
 
-data class OrderModel(
-    val productId: String = "",
-    val orderNumber: Number = 0
-): ViewModel(),  Serializable {
+class OrderModel(
+    val order_name: String = "",
+    val order_des: String = "",
+    val order_quantity: Int = 0,
+    val order_price: Int = 0,
+    val order_image: Int = 0
+): ViewModel() {
 }

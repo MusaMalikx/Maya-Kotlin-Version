@@ -2,15 +2,14 @@ package com.example.maya.Ui.Adapters
 
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.maya.R
 import com.example.maya.Ui.Models.OrderModel
-import com.example.maya.Ui.ProductActivity
 
 class OrderAdapter(private val orderList: ArrayList<OrderModel>, context: Context): RecyclerView.Adapter<OrderAdapter.ViewHolder>()  {
 
@@ -26,11 +25,13 @@ class OrderAdapter(private val orderList: ArrayList<OrderModel>, context: Contex
     override fun onBindViewHolder(holder: OrderAdapter.ViewHolder, position: Int) {
 
         val order: OrderModel = orderList[position]
-        holder.orderNumber.text = "# "+order.orderNumber
+        holder.name.text = order.order_name
+        holder.price.text = "$"+order.order_price.toString()
+        holder.quantity.text = order.order_quantity.toString()
 
-        holder.itemView.setOnClickListener {
-            goOrdersPage(position)
-        }
+        Glide.with(ctx)
+            .load(order.order_image)
+            .into(holder.image)
 
     }
 
@@ -39,15 +40,9 @@ class OrderAdapter(private val orderList: ArrayList<OrderModel>, context: Contex
     }
 
     inner class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
-
-       val orderNumber:TextView = itemView.findViewById(R.id.order_number)
-
-
-    }
-
-    private fun goOrdersPage(position: Int) {
-        val intent = Intent(ctx , ProductActivity::class.java)
-        intent.putExtra("order", orderList[position])
-        ctx.startActivity(intent)
+        val image:ImageView = itemView.findViewById(R.id.order_image)
+        val name:TextView = itemView.findViewById(R.id.order_name)
+        val price:TextView = itemView.findViewById(R.id.order_price)
+        val quantity:TextView = itemView.findViewById(R.id.order_quantity)
     }
 }

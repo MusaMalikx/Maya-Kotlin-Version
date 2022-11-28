@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
 import com.example.maya.R
-import com.example.maya.Ui.Adapters.OrderAdapter
-import com.example.maya.Ui.Models.OrderModel
+import com.example.maya.Ui.Adapters.OrdersAdapter
+import com.example.maya.Ui.Models.OrdersModel
 
 
 class OrdersFragment : Fragment() {
@@ -23,8 +23,8 @@ class OrdersFragment : Fragment() {
     lateinit var animationViewMain: LottieAnimationView
     lateinit var emptyOrderMsgLayout : LinearLayout
 
-    lateinit var orderProduct: ArrayList<OrderModel>
-    lateinit var orderAdapter: OrderAdapter
+    lateinit var orderProduct: ArrayList<OrdersModel>
+    lateinit var orderAdapter: OrdersAdapter
     lateinit var orderRecView: RecyclerView
 
     lateinit var orderText: TextView
@@ -44,16 +44,16 @@ class OrdersFragment : Fragment() {
 
 //        orderProduct = ViewModelProvider(this)[OrderModel::class.java]
         orderProduct = arrayListOf()
-        orderProduct.add(OrderModel(orderNumber = 12))
-        orderProduct.add(OrderModel(orderNumber = 13))
-        orderProduct.add(OrderModel(orderNumber = 14))
-        orderProduct.add(OrderModel(orderNumber = 15))
+        orderProduct.add(OrdersModel(orderNumber = 12))
+        orderProduct.add(OrdersModel(orderNumber = 13))
+        orderProduct.add(OrdersModel(orderNumber = 14))
+        orderProduct.add(OrdersModel(orderNumber = 15))
 
-        orderRecView = view.findViewById(R.id.order_recycler_view)
+        orderRecView = view.findViewById(R.id.orders_recycler_view)
         orderRecView.layoutManager = LinearLayoutManager(context,
             LinearLayoutManager.VERTICAL, false)
         orderRecView.setHasFixedSize(true)
-        orderAdapter = OrderAdapter(orderProduct, activity as Context)
+        orderAdapter = OrdersAdapter(orderProduct, activity as Context)
         orderRecView.adapter = orderAdapter
 
         orderRecView.visibility = View.GONE
