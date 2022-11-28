@@ -7,6 +7,35 @@
     android:background="@color/background"
     tools:context=".Ui.Fragments.OrdersFragment">
 
+    <TextView
+        android:layout_marginTop="30dp"
+        android:id="@+id/order_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:fontFamily="@font/metropolis_semibold"
+        android:text="My Orders"
+        android:textColor="@color/mainText"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+
+        android:id="@+id/order_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/order_text">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
     <LinearLayout
         android:gravity="center"
         android:id="@+id/emptyOrderMsgLayout"

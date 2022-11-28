@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/order_dialogue"
+    android:background="@drawable/menu_bg"
+    android:paddingTop="40dp"
+    android:paddingBottom="40dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/success_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_success" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/metropolis_semibold"
+            android:gravity="center"
+            android:text="Order Confirmed!"
+            android:textColor="@color/textAd"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animationViewDia"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="23dp"
+        app:lottie_rawRes="@raw/circle_progress" />
+    </LinearLayout>
+
+</LinearLayout>

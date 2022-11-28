@@ -49,7 +49,7 @@ class ProfileFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
 
         profileImage_profileFrag = view.findViewById(R.id.profileImage_profileFrag)
-        val settingCd_profileFrag = view.findViewById<CardView>(R.id.settingCd_profileFrag)
+//        val settingCd_profileFrag = view.findViewById<CardView>(R.id.settingCd_profileFrag)
         uploadImage_profileFrag = view.findViewById(R.id.uploadImage_profileFrag)
         profileName_profileFrag = view.findViewById(R.id.profileName_profileFrag)
         profileEmail_profileFrag = view.findViewById(R.id.profileEmail_profileFrag)
@@ -57,31 +57,6 @@ class ProfileFragment : Fragment() {
         linearLayout2 = view.findViewById(R.id.linearLayout2)
         linearLayout3 = view.findViewById(R.id.linearLayout3)
         linearLayout4 = view.findViewById(R.id.linearLayout4)
-        val shippingAddressCard_ProfilePage = view.findViewById<CardView>(R.id.shippingAddressCard_ProfilePage)
-        val paymentMethod_ProfilePage = view.findViewById<CardView>(R.id.paymentMethod_ProfilePage)
-        val cardsNumber_profileFrag:TextView = view.findViewById(R.id.cardsNumber_profileFrag)
-
-//        cardViewModel = ViewModelProviders.of(this).get(CardViewModel::class.java)
-//
-//        cardViewModel.allCards.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-//            cards = it.size
-//        })
-
-        if(cards == 0){
-            cardsNumber_profileFrag.text = "You Have no Cards."
-        }
-        else{
-
-        cardsNumber_profileFrag.text = "You Have "+ cards.toString() + " Cards."
-        }
-
-//        shippingAddressCard_ProfilePage.setOnClickListener {
-//            startActivity(Intent(context,ShipingAddressActivity::class.java))
-//        }
-//
-//        paymentMethod_ProfilePage.setOnClickListener {
-//            startActivity(Intent(context,PaymentMethodActivity::class.java))
-//        }
 
         hideLayout()
 

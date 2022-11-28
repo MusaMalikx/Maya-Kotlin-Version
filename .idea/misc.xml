@@ -7,6 +7,7 @@
         <entry key="app/src/main/res/drawable/btn_bg.xml" value="0.1155" />
         <entry key="app/src/main/res/drawable/btn_bg2.xml" value="0.1155" />
         <entry key="app/src/main/res/drawable/circle_bg.xml" value="0.1155" />
+        <entry key="app/src/main/res/drawable/discount_bg.xml" value="0.1155" />
         <entry key="app/src/main/res/drawable/edit_text_bg.xml" value="0.1155" />
         <entry key="app/src/main/res/drawable/ic_american_express.xml" value="0.1155" />
         <entry key="app/src/main/res/drawable/ic_back.xml" value="0.1155" />
@@ -34,6 +35,10 @@
         <entry key="app/src/main/res/drawable/ic_success.xml" value="0.1155" />
         <entry key="app/src/main/res/drawable/ic_unionpay.xml" value="0.1155" />
         <entry key="app/src/main/res/drawable/ic_visa.xml" value="0.1155" />
+        <entry key="app/src/main/res/drawable/ic_visual_search.xml" value="0.1155" />
+        <entry key="app/src/main/res/drawable/menu_bg.xml" value="0.1155" />
+        <entry key="app/src/main/res/drawable/new_product_bg.xml" value="0.1155" />
+        <entry key="app/src/main/res/drawable/strock_bg.xml" value="0.1155" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.4054306030273438" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.10174560546875" />
@@ -44,9 +49,12 @@
         <entry key="app/src/main/res/layout/fragment_fav.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_likes.xml" value="0.14336372847011145" />
+        <entry key="app/src/main/res/layout/fragment_order_confirmed.xml" value="0.24155403608729897" />
+        <entry key="app/src/main/res/layout/fragment_orders.xml" value="0.2947916666666667" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_carousel.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_cart.xml" value="0.2947916666666667" />
+        <entry key="app/src/main/res/layout/item_order.xml" value="0.14336372847011145" />
         <entry key="app/src/main/res/layout/item_product.xml" value="0.31813354492187507" />
         <entry key="app/src/main/res/menu/botom_nav.xml" value="0.24259259259259258" />
         <entry key="app/src/main/res/menu/bottom_nav.xml" value="0.1" />

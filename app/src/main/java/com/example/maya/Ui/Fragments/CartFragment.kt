@@ -1,5 +1,6 @@
 package com.example.maya.Ui.Fragments
 
+import android.opengl.Visibility
 import android.os.Bundle
 import android.os.Handler
 
@@ -11,6 +12,7 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import androidx.recyclerview.widget.RecyclerView
@@ -20,6 +22,7 @@ import com.example.maya.Ui.Adapters.CartAdapter
 import com.example.maya.Ui.Adapters.ProductAdapter
 import com.example.maya.Ui.Models.CartModel
 import com.example.maya.Ui.Models.ProductModel
+import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class CartFragment : Fragment() {
 
@@ -35,6 +38,9 @@ class CartFragment : Fragment() {
     lateinit var bottomCartLayout:LinearLayout
     lateinit var emptyCartLayout:LinearLayout
     lateinit var cartTotalText:TextView
+
+    lateinit var animationViewDialog: LottieAnimationView
+    lateinit var successLayout: LinearLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,10 +101,39 @@ class CartFragment : Fragment() {
         cartRecView.adapter = cartAdapter
 
         checkoutBtn.setOnClickListener {
-            Toast.makeText(view.context, "Checkout Coming Soon!", Toast.LENGTH_SHORT).show()
+            checkoutListner(view)
         }
 
         return view
+    }
+
+    private fun checkoutListner(view: View){
+
+        val dialog = BottomSheetDialog(
+            view.context, R.style.BottomSheetDialogTheme
+        )
+
+        val bottomSheetView = LayoutInflater.from(view.context.applicationContext).inflate(
+            R.layout.fragment_order_confirmed,
+            view.findViewById<ConstraintLayout>(R.id.order_dialogue)
+        )
+
+        animationViewDialog = bottomSheetView.findViewById(R.id.animationViewDia)
+        successLayout = bottomSheetView.findViewById(R.id.success_layout)
+
+        animationViewDialog.playAnimation()
+        animationViewDialog.loop(true)
+        successLayout.visibility = View.GONE
+
+        Handler().postDelayed({
+            animationViewDialog.pauseAnimation()
+            animationViewDialog.visibility = View.GONE
+            successLayout.visibility = View.VISIBLE
+        }, 1500)
+
+        dialog.setContentView(bottomSheetView)
+        dialog.show()
+
     }
 
     private fun hideLayout(){
