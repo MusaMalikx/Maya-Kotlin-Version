@@ -31,7 +31,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2">
 
         <EditText
-            android:id="@+id/emailEt"
+            android:id="@+id/login_email"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:textSize="15sp"
@@ -59,7 +59,7 @@
 
         <EditText
             android:layout_marginTop="10dp"
-            android:id="@+id/PassEt"
+            android:id="@+id/login_password"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:textSize="15sp"
