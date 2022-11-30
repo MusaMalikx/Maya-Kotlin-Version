@@ -1,5 +1,6 @@
 package com.example.maya.Ui.Fragments
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
@@ -13,6 +14,9 @@ import com.airbnb.lottie.LottieAnimationView
 
 
 import com.example.maya.R
+import com.example.maya.Ui.HomeActivity
+import com.example.maya.Ui.Libs.Firebase
+import com.example.maya.Ui.LoginActivity
 import de.hdodenhof.circleimageview.CircleImageView
 
 
@@ -23,14 +27,11 @@ class ProfileFragment : Fragment() {
 
     lateinit var profileImage_profileFrag: CircleImageView
 
-    private val PICK_IMAGE_REQUEST = 71
-    private var filePath: Uri? = null
+    lateinit var logout_btn: Button
 
     lateinit var uploadImage_profileFrag:Button
     lateinit var profileName_profileFrag:TextView
     lateinit var profileEmail_profileFrag:TextView
-
-    var cards: Int = 0
 
     lateinit var linearLayout2:LinearLayout
     lateinit var linearLayout3:LinearLayout
@@ -57,12 +58,19 @@ class ProfileFragment : Fragment() {
         linearLayout2 = view.findViewById(R.id.linearLayout2)
         linearLayout3 = view.findViewById(R.id.linearLayout3)
         linearLayout4 = view.findViewById(R.id.linearLayout4)
+        logout_btn = view.findViewById(R.id.logout_btn)
 
         hideLayout()
 
         Handler().postDelayed({
             showLayout()
         }, 2000)
+
+        logout_btn.setOnClickListener {
+            Firebase.firebaseAuth.signOut()
+            Toast.makeText(view.context, "Signed out successfully!", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(view.context, LoginActivity::class.java))
+        }
 
         return view
     }
@@ -73,11 +81,13 @@ class ProfileFragment : Fragment() {
         linearLayout2.visibility = View.GONE
         linearLayout3.visibility = View.GONE
         linearLayout4.visibility = View.GONE
+        logout_btn.visibility = View.GONE
         animationView.visibility = View.VISIBLE
     }
     private fun showLayout(){
         animationView.pauseAnimation()
         animationView.visibility = View.GONE
+        logout_btn.visibility = View.VISIBLE
         linearLayout2.visibility = View.VISIBLE
         linearLayout3.visibility = View.VISIBLE
         linearLayout4.visibility = View.VISIBLE
