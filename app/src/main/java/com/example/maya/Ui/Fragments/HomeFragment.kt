@@ -58,7 +58,7 @@ class HomeFragment: Fragment() {
         bl = BusinessHandler(view.context)
 
         initializingCarousel(view)
-//        insertProducts()
+        insertProducts()
         initializingNewProducts()
         initializingSaleProducts()
 
@@ -99,12 +99,12 @@ class HomeFragment: Fragment() {
     }
 
     fun insertProducts(){
-        val p1 = ProductModel("Coat", "1", "231", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea co",
-        0.0F, "0", false, "levis", R.drawable.eight,"Coats", "Best of the best stichings")
-        newProduct.add(p1)
-        newProduct.add(p1)
-        newProduct.add(p1)
-        newProduct.add(p1)
+//        val p1 = ProductModel("Coat", "1", "231", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea co",
+//        0.0F, "0", false, "levis", R.drawable.eight,"Coats", "Best of the best stichings")
+//        newProduct.add(p1)
+//        newProduct.add(p1)
+//        newProduct.add(p1)
+//        newProduct.add(p1)
 
         val p2 = ProductModel("Sweater", "1", "231", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea co",
             0.0F, "15%", true, "levis", R.drawable.seven,"Coats", "Best of the best stichings")

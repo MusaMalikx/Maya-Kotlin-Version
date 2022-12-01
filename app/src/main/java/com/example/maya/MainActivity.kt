@@ -28,6 +28,8 @@ class MainActivity : AppCompatActivity() {
             startActivity(myIntent)
         }
 
+//        this.deleteDatabase("MAYA_DB")
+
     }
 
     fun addingProducts(){

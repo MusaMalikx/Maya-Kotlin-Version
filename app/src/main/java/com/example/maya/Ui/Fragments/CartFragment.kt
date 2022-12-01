@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
+import com.example.maya.Bl.BusinessHandler
 import com.example.maya.R
 import com.example.maya.Ui.Adapters.CartAdapter
 import com.example.maya.Ui.Adapters.ProductAdapter
@@ -27,9 +28,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 class CartFragment : Fragment() {
 
     lateinit var animationView: LottieAnimationView
-    lateinit var totalPriceBagFrag:TextView
+    lateinit var totalPrice:TextView
 
-    lateinit var cartProduct:ArrayList<CartModel>
+    lateinit var cartProduct:MutableList<CartModel>
     lateinit var cartAdapter: CartAdapter
     lateinit var cartRecView:RecyclerView
     lateinit var checkoutBtn:Button
@@ -41,6 +42,8 @@ class CartFragment : Fragment() {
 
     lateinit var animationViewDialog: LottieAnimationView
     lateinit var successLayout: LinearLayout
+
+    lateinit var bl:BusinessHandler
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,7 +60,7 @@ class CartFragment : Fragment() {
         cartRecView = view.findViewById(R.id.cart_recycler_view)
         animationView = view.findViewById(R.id.animationViewCartPage)
         animationViewMain = view.findViewById(R.id.animationView)
-        totalPriceBagFrag = view.findViewById(R.id.total_price)
+        totalPrice = view.findViewById(R.id.total_price)
         checkoutBtn = view.findViewById(R.id.cart_checkout)
 
         cartProduct = arrayListOf()
@@ -65,8 +68,11 @@ class CartFragment : Fragment() {
         bottomCartLayout = view.findViewById(R.id.bottomCartLayout)
         emptyCartLayout = view.findViewById(R.id.emptyCartMsgLayout)
         cartTotalText = view.findViewById(R.id.cart_text)
+        bl = BusinessHandler(view.context)
 
-        insertProducts()
+        insertProducts(view)
+
+        totalPrice.text = "$" + bl.getCartTotal()
 
         hideLayout()
 
@@ -94,17 +100,15 @@ class CartFragment : Fragment() {
             }
         }, 2000)
 
-        cartRecView.layoutManager = LinearLayoutManager(view.context,
-            LinearLayoutManager.VERTICAL, false)
-        cartRecView.setHasFixedSize(true)
-        cartAdapter = CartAdapter(cartProduct, view.context )
-        cartRecView.adapter = cartAdapter
-
         checkoutBtn.setOnClickListener {
             checkoutListner(view)
         }
 
         return view
+    }
+
+    fun updateTotalPrice(){
+        totalPrice.text = "$" + bl.getCartTotal()
     }
 
     private fun checkoutListner(view: View){
@@ -155,52 +159,59 @@ class CartFragment : Fragment() {
 
     }
 
-    fun insertProducts() {
-        val p1 = CartModel(
-            "Coat",
-            "1",
-            "231",
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea co",
-            0.0F,
-            "0",
-            false,
-            "levis",
-            R.drawable.eight,
-            "Coats",
-            "Best of the best stichings"
-        )
-        val p2 = CartModel(
-            "Coat",
-            "1",
-            "231",
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea co",
-            0.0F,
-            "0",
-            false,
-            "levis",
-            R.drawable.seven,
-            "Coats",
-            "Best of the best stichings",
-            12
-        )
-        val p3 = CartModel(
-            "Coat",
-            "1",
-            "231",
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea co",
-            0.0F,
-            "0",
-            false,
-            "levis",
-            R.drawable.six,
-            "Coats",
-            "Best of the best stichings",
-            4
-        )
-        cartProduct.add(p1)
-        cartProduct.add(p2)
-        cartProduct.add(p3)
-        cartProduct.add(p1)
+    fun insertProducts(view: View) {
+        cartProduct = bl.readCartProducts()
+        println(cartProduct)
+        cartRecView.layoutManager = LinearLayoutManager(view.context,
+            LinearLayoutManager.VERTICAL, false)
+        cartRecView.setHasFixedSize(true)
+        cartAdapter = CartAdapter(cartProduct, view.context, this@CartFragment )
+        cartRecView.adapter = cartAdapter
+//        val p1 = CartModel(
+//            "Coat",
+//            "1",
+//            "231",
+//            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea co",
+//            0.0F,
+//            "0",
+//            false,
+//            "levis",
+//            R.drawable.eight,
+//            "Coats",
+//            "Best of the best stichings"
+//        )
+//        val p2 = CartModel(
+//            "Coat",
+//            "1",
+//            "231",
+//            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea co",
+//            0.0F,
+//            "0",
+//            false,
+//            "levis",
+//            R.drawable.seven,
+//            "Coats",
+//            "Best of the best stichings",
+//            12
+//        )
+//        val p3 = CartModel(
+//            "Coat",
+//            "1",
+//            "231",
+//            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea co",
+//            0.0F,
+//            "0",
+//            false,
+//            "levis",
+//            R.drawable.six,
+//            "Coats",
+//            "Best of the best stichings",
+//            4
+//        )
+//        cartProduct.add(p1)
+//        cartProduct.add(p2)
+//        cartProduct.add(p3)
+//        cartProduct.add(p1)
     }
 
 }

@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.maya.Bl.BusinessHandler
+import com.example.maya.Bl.Cart
 import com.example.maya.R
 import com.example.maya.Ui.Adapters.ProductAdapter
 import com.example.maya.Ui.Models.ProductModel
@@ -27,8 +29,10 @@ class ProductActivity: AppCompatActivity(), View.OnClickListener {
     lateinit var productDes:TextView
     lateinit var product:ProductModel
     lateinit var productBackArrow: ImageView
+    lateinit var productRating: RatingBar
 
     lateinit var addToCart: Button
+    private var bl = BusinessHandler(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +52,7 @@ class ProductActivity: AppCompatActivity(), View.OnClickListener {
         productPrice = findViewById(R.id.product_price)
         productDes = findViewById(R.id.product_des)
         addToCart = findViewById(R.id.add_to_cart)
+        productRating = findViewById(R.id.product_rating)
 
         productBackArrow.setOnClickListener(this)
         addToCart.setOnClickListener(this)
@@ -56,6 +61,7 @@ class ProductActivity: AppCompatActivity(), View.OnClickListener {
         productBrand.text = product.productBrand
         productPrice.text = "$"+product.productPrice
         productDes.text = product.productDes
+        productRating.rating = product.productRating
 
         insertProducts()
 
@@ -98,7 +104,7 @@ class ProductActivity: AppCompatActivity(), View.OnClickListener {
     fun addToCartDialog(){
 
         var qua = 1
-        var pPrice = 231
+        var pPrice = productPrice.text.toString().subSequence(1, productPrice.text.toString().length).toString().toInt()
 
         val dialog = BottomSheetDialog(
             this, R.style.BottomSheetDialogTheme
@@ -113,7 +119,9 @@ class ProductActivity: AppCompatActivity(), View.OnClickListener {
 
             pPrice *= bottomSheetView.findViewById<EditText>(R.id.quantityEtBottom).text.toString()
                 .toInt()
-            Toast.makeText(this, "Product Added to Cart Successfully", Toast.LENGTH_SHORT).show()
+            val cart = Cart(product.productImage, product.productName, product.productId, product.productPrice, qua)
+            bl.insertCartProduct(cart)
+//            Toast.makeText(this, "Product Added to Cart Successfully", Toast.LENGTH_SHORT).show()
 //            addProductToBag()
             dialog.dismiss()
         }
