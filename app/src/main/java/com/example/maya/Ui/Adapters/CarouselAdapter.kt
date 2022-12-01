@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.maya.R
 
 
-class CarouselAdapter(private val context: Context, val arrayList: ArrayList<Int>) :
+class CarouselAdapter(private val context: Context, val arrayList: MutableList<Int>) :
     RecyclerView.Adapter<CarouselAdapter.MyViewHolder>() {
 //    private var arrayList = ArrayList<String>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {

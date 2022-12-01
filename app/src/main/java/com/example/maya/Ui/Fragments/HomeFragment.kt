@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.airbnb.lottie.LottieAnimationView
+import com.example.maya.Bl.BusinessHandler
 import com.example.maya.R
 import com.example.maya.Ui.Adapters.CarouselAdapter
 import com.example.maya.Ui.Adapters.ProductAdapter
@@ -22,7 +23,7 @@ import com.example.maya.Ui.Models.ProductModel
 
 class HomeFragment: Fragment() {
 
-    lateinit var newProduct:ArrayList<ProductModel>
+    lateinit var newProduct:MutableList<ProductModel>
     lateinit var saleProduct:ArrayList<ProductModel>
     lateinit var newProductAdapter: ProductAdapter
     lateinit var saleProductAdapter: ProductAdapter
@@ -33,6 +34,8 @@ class HomeFragment: Fragment() {
     lateinit var animationView: LottieAnimationView
     lateinit var cardView: CardView
     lateinit var viewpager: ViewPager2
+
+    private lateinit var bl:BusinessHandler
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,8 +55,10 @@ class HomeFragment: Fragment() {
         newProduct = arrayListOf()
         saleProduct = arrayListOf()
 
+        bl = BusinessHandler(view.context)
+
         initializingCarousel(view)
-        insertProducts()
+//        insertProducts()
         initializingNewProducts()
         initializingSaleProducts()
 
@@ -68,14 +73,16 @@ class HomeFragment: Fragment() {
     }
 
     fun initializingCarousel(view: View){
-        var arr: ArrayList<Int> = arrayListOf(R.drawable.landscape1,R.drawable.landscape2,R.drawable.landscape3,R.drawable.landscape4,R.drawable.landscape5,R.drawable.landscape6)
-
+        var arr : MutableList<Int> = bl.readLandscapePics()
+//        var arr: ArrayList<Int> = arrayListOf(R.drawable.landscape1_1,R.drawable.landscape1_2,R.drawable.landscape1_3,R.drawable.landscape1_4,R.drawable.landscape1_5,R.drawable.landscape1_6,R.drawable.landscape1_7,R.drawable.landscape1_8,R.drawable.landscape1_9,R.drawable.landscape1_10)
+//        println(arr)
         viewpager = view.findViewById(R.id.viewpager)
         viewpager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
         viewpager.adapter = CarouselAdapter(view.context, arr)
     }
 
     fun initializingNewProducts(){
+        newProduct = bl.readNewProducts()
         newRecView.layoutManager = LinearLayoutManager(context,
             LinearLayoutManager.HORIZONTAL, false)
         newRecView.setHasFixedSize(true)

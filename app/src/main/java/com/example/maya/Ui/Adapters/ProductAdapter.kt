@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide
 import com.example.maya.R
 import com.example.maya.Ui.ProductActivity
 
-class ProductAdapter(private val productList: ArrayList<ProductModel>, context: Context): RecyclerView.Adapter<ProductAdapter.ViewHolder>()  {
+class ProductAdapter(private val productList: MutableList<ProductModel>, context: Context): RecyclerView.Adapter<ProductAdapter.ViewHolder>()  {
 
     val ctx: Context = context
 
@@ -34,7 +34,6 @@ class ProductAdapter(private val productList: ArrayList<ProductModel>, context: 
 
         Glide.with(ctx)
             .load(product.productImage)
-//            .placeholder(bn)
             .into(holder.productImage_singleProduct)
 
 

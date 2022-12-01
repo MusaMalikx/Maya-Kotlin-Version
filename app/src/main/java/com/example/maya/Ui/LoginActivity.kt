@@ -75,6 +75,7 @@ class LoginActivity: AppCompatActivity(),View.OnClickListener {
                     Toast.makeText(this, "Signed in successfully", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this, HomeActivity::class.java)
                     startActivity(intent)
+                    progressDialog.dismiss()
                     finish()
 
                 } else {
