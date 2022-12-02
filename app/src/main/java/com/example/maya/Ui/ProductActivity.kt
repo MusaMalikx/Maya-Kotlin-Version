@@ -64,9 +64,7 @@ class ProductActivity: AppCompatActivity(), View.OnClickListener {
         productDes.text = product.productDes
         productRating.rating = product.productRating
 
-//        insertProducts()
-
-        recommendProduct = bl.readSuggestedProducts(product.productCategory)
+        recommendProduct = bl.readSuggestedProducts(product.productCategory, product.productId)
 
         recommendRecView.layoutManager = LinearLayoutManager(this,
             LinearLayoutManager.HORIZONTAL, false)
@@ -82,26 +80,6 @@ class ProductActivity: AppCompatActivity(), View.OnClickListener {
             R.id.add_to_cart -> { addToCartDialog() }
             else -> return
         }
-    }
-
-    fun insertProducts() {
-        val p1 = ProductModel(
-            "Coat",
-            "1",
-            "231",
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea co",
-            0.0F,
-            "0",
-            false,
-            "levis",
-            R.drawable.eight,
-            "Coats",
-            "Best of the best stichings"
-        )
-        recommendProduct.add(p1)
-        recommendProduct.add(p1)
-        recommendProduct.add(p1)
-        recommendProduct.add(p1)
     }
 
     fun addToCartDialog(){
@@ -124,8 +102,6 @@ class ProductActivity: AppCompatActivity(), View.OnClickListener {
                 .toInt()
             val cart = Cart(product.productImage, product.productName, product.productId, product.productPrice, qua)
             bl.insertCartProduct(cart)
-//            Toast.makeText(this, "Product Added to Cart Successfully", Toast.LENGTH_SHORT).show()
-//            addProductToBag()
             dialog.dismiss()
         }
 

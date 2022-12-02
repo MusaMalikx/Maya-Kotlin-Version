@@ -35,7 +35,4 @@ class CarouselAdapter(private val context: Context, val arrayList: MutableList<I
         }
     }
 
-//    init {
-//        this.arrayList = arrayList
-//    }
 }

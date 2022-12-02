@@ -41,7 +41,6 @@ class HomeFragment: Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_home, container, false)
         activity?.window?.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
 
@@ -58,7 +57,6 @@ class HomeFragment: Fragment() {
         bl = BusinessHandler(view.context)
 
         initializingCarousel(view)
-//        insertProducts()
         initializingNewProducts()
         initializingSaleProducts()
 
@@ -74,8 +72,6 @@ class HomeFragment: Fragment() {
 
     fun initializingCarousel(view: View){
         var arr : MutableList<Int> = bl.readLandscapePics()
-//        var arr: ArrayList<Int> = arrayListOf(R.drawable.landscape1_1,R.drawable.landscape1_2,R.drawable.landscape1_3,R.drawable.landscape1_4,R.drawable.landscape1_5,R.drawable.landscape1_6,R.drawable.landscape1_7,R.drawable.landscape1_8,R.drawable.landscape1_9,R.drawable.landscape1_10)
-//        println(arr)
         viewpager = view.findViewById(R.id.viewpager)
         viewpager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
         viewpager.adapter = CarouselAdapter(view.context, arr)
@@ -99,27 +95,10 @@ class HomeFragment: Fragment() {
         saleRecView.adapter = saleProductAdapter
     }
 
-    fun insertProducts(){
-//        val p1 = ProductModel("Coat", "1", "231", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea co",
-//        0.0F, "0", false, "levis", R.drawable.eight,"Coats", "Best of the best stichings")
-//        newProduct.add(p1)
-//        newProduct.add(p1)
-//        newProduct.add(p1)
-//        newProduct.add(p1)
-
-        val p2 = ProductModel("Sweater", "1", "231", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea co",
-            0.0F, "15%", true, "levis", R.drawable.seven,"Coats", "Best of the best stichings")
-        saleProduct.add(p2)
-        saleProduct.add(p2)
-        saleProduct.add(p2)
-        saleProduct.add(p2)
-    }
-
     private fun hideLayout(){
         animationView.playAnimation()
         animationView.loop(true)
         viewpager.visibility = View.GONE
-//        coverRecView.visibility = View.GONE
         newLayout.visibility = View.GONE
         saleLayout.visibility = View.GONE
         cardView.visibility = View.GONE
@@ -129,7 +108,6 @@ class HomeFragment: Fragment() {
         animationView.pauseAnimation()
         animationView.visibility = View.GONE
         viewpager.visibility = View.VISIBLE
-//        coverRecView.visibility = View.VISIBLE
         newLayout.visibility = View.VISIBLE
         saleLayout.visibility = View.VISIBLE
         cardView.visibility = View.VISIBLE

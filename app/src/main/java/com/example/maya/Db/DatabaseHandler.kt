@@ -185,7 +185,7 @@ class DatabaseHandler(val context:Context): DatabaseHandlerInterface, SQLiteOpen
     }
 
     @SuppressLint("Range")
-    override fun readSuggestedProducts(cat: String): MutableList<ProductModel> {
+    override fun readSuggestedProducts(cat: String, iid: String): MutableList<ProductModel> {
         val list: MutableList<ProductModel> = arrayListOf()
         val db = this.readableDatabase
         val query = "Select * from " + PRODUCT_TABLE_NAME + " where " + COL_CATEGORY + " = " + "'"+ cat + "'"
@@ -210,8 +210,10 @@ class DatabaseHandler(val context:Context): DatabaseHandlerInterface, SQLiteOpen
                     have = true
                 }
 
-                val item = ProductModel(name, id, price, desc, rating.toFloat(), discount, have, brand, image, category, note)
-                list.add(item)
+                if (iid != id){
+                    val item = ProductModel(name, id, price, desc, rating.toFloat(), discount, have, brand, image, category, note)
+                    list.add(item)
+                }
 
             }while (result.moveToNext())
         }
@@ -261,14 +263,11 @@ class DatabaseHandler(val context:Context): DatabaseHandlerInterface, SQLiteOpen
         if (result.moveToFirst()){
             do{
                 val id = result.getString(result.getColumnIndex(COL_ID))
-                val user_id = result.getString(result.getColumnIndex(COL_USER_ID))
                 val name = result.getString(result.getColumnIndex(COL_NAME))
                 val price = result.getString(result.getColumnIndex(COL_PRICE))
                 val image = result.getString(result.getColumnIndex(COL_IMAGE)).toInt()
                 val quantity = result.getString(result.getColumnIndex(COL_QUANTITY)).toInt()
 
-//                println(userId)
-//                println(user_id)
                 val item = CartModel(id, name,price,image, quantity)
                 list.add(item)
 
@@ -287,24 +286,18 @@ class DatabaseHandler(val context:Context): DatabaseHandlerInterface, SQLiteOpen
         var cv = ContentValues()
         cv.put(COL_QUANTITY, quantity)
         db.update(CART_TABLE_NAME, cv, COL_ID + "= '" + id + "' AND " + COL_USER_ID + "= '" + Firebase.firebaseAuth.currentUser!!.uid + "'", null)
-//        db.update(CART_TABLE_NAME, cv, COL_ID + "=?", arrayOf(id))
-        Toast.makeText(context, "Cart Updated", Toast.LENGTH_SHORT).show()
         db.close()
     }
 
     override fun deleteCartData(id: String) {
         val db = this.writableDatabase
         db.delete(CART_TABLE_NAME, COL_ID + "= '" + id + "' AND " + COL_USER_ID + "= '" + Firebase.firebaseAuth.currentUser!!.uid + "'", null)
-//        db.delete(CART_TABLE_NAME, COL_ID + "=?", arrayOf(id) )
-        Toast.makeText(context, "Cart Item Removed!", Toast.LENGTH_SHORT).show()
         db.close()
     }
 
     override fun deleteUserCart() {
         val db = this.writableDatabase
         db.delete(CART_TABLE_NAME,  COL_USER_ID + "= '" + Firebase.firebaseAuth.currentUser!!.uid + "'", null)
-//        db.delete(CART_TABLE_NAME, COL_ID + "=?", arrayOf(id) )
-//        Toast.makeText(context, "Cart Item Removed!", Toast.LENGTH_SHORT).show()
         db.close()
     }
 
@@ -332,8 +325,6 @@ class DatabaseHandler(val context:Context): DatabaseHandlerInterface, SQLiteOpen
 
             if (result == -1.toLong() )
                 Toast.makeText(context, "Products Order Insertion Failed", Toast.LENGTH_SHORT).show()
-            else
-                Toast.makeText(context, "Products Order Inserted Successfully", Toast.LENGTH_SHORT).show()
 
         deleteUserCart()
 
@@ -346,7 +337,6 @@ class DatabaseHandler(val context:Context): DatabaseHandlerInterface, SQLiteOpen
         val Query =
             "Select * from " + ORDER_TABLE_NAME + " where " + COL_USER_ID + " = " + "'" + Firebase.firebaseAuth.currentUser!!.uid + "'"
         val result = db.rawQuery(Query, null)
-//        println(userId)
 
         var temp: MutableList<String> = arrayListOf()
 

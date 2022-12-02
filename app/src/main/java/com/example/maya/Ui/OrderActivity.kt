@@ -42,8 +42,7 @@ class OrderActivity : AppCompatActivity() {
         Toast.makeText(this, order_id, Toast.LENGTH_SHORT).show()
 
         orderProduct = bl.readProductOrder(order_id)
-        totalPrice.text = bl.getOrderTotal(order_id).toString()
-//        orderProduct.add(OrderModel("Coat", "", 12, 123, R.drawable.twelve))
+        totalPrice.text = "$"+bl.getOrderTotal(order_id).toString()
 
         orderRecView.layoutManager = LinearLayoutManager(this,
             LinearLayoutManager.VERTICAL, false)

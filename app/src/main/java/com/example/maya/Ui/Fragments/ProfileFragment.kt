@@ -52,11 +52,9 @@ class ProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
 
         profileImage= view.findViewById(R.id.profile_image)
-//        val settingCd_profileFrag = view.findViewById<CardView>(R.id.settingCd_profileFrag)
         uploadImage = view.findViewById(R.id.upload_image)
         profileName = view.findViewById(R.id.profile_name)
         profileEmail = view.findViewById(R.id.profile_email)
@@ -133,7 +131,6 @@ class ProfileFragment : Fragment() {
 
         usersImageRef.getFile(localFile).addOnSuccessListener {
             profileImage.setImageBitmap(BitmapFactory.decodeFile(localFile.getAbsolutePath()))
-//            Toast.makeText(view?.context, "Image Read from firebase Successfully!", Toast.LENGTH_SHORT).show()
         }.addOnFailureListener {
             Toast.makeText(view?.context, "Not Found or Image Read from firebase error!", Toast.LENGTH_SHORT).show()
         }

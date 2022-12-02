@@ -32,8 +32,8 @@ class BusinessHandler(val context: Context):BusinessHandlerInterface {
         return db.readProducts("saleProducts")
     }
 
-    override fun readSuggestedProducts(cat: String): MutableList<ProductModel> {
-        return db.readSuggestedProducts(cat)
+    override fun readSuggestedProducts(cat: String, id: String): MutableList<ProductModel> {
+        return db.readSuggestedProducts(cat, id)
     }
 
     override fun insertCartProduct(c: Cart) {

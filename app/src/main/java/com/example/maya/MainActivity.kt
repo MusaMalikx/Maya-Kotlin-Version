@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val btn_start = findViewById<Button>(R.id.btn_start)
+
 //        this.deleteDatabase("MAYA_DB")
 //        addingCarouselImages()
 //        addingProducts()

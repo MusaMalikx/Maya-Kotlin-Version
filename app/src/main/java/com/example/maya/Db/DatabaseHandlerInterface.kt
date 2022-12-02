@@ -13,7 +13,7 @@ interface DatabaseHandlerInterface {
     fun readLandscapePics() : MutableList<Int>
     fun insertProduct(p: Product)
     fun readProducts(state: String) : MutableList<ProductModel>
-    fun readSuggestedProducts(cat: String) : MutableList<ProductModel>
+    fun readSuggestedProducts(cat: String, id: String) : MutableList<ProductModel>
     fun insertCartProduct(c: Cart)
     fun readCartProducts() : MutableList<CartModel>
     fun updateCartQuantityProduct(id: String, quantity: Int)

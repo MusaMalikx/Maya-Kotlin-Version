@@ -12,7 +12,7 @@ interface BusinessHandlerInterface {
     fun insertProduct(p: Product)
     fun readNewProducts(): MutableList<ProductModel>
     fun readSaleProducts(): MutableList<ProductModel>
-    fun readSuggestedProducts(cat: String) : MutableList<ProductModel>
+    fun readSuggestedProducts(cat: String, id: String) : MutableList<ProductModel>
     fun insertCartProduct(c: Cart)
     fun readCartProducts() : MutableList<CartModel>
     fun updateCartQuantityProduct(id: String, quantity: Int)

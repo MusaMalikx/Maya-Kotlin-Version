@@ -38,9 +38,7 @@ class OrdersFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val view =  inflater.inflate(R.layout.fragment_orders, container, false)
-
 
         animationView = view.findViewById(R.id.animationViewLikePage)
         animationViewMain = view.findViewById(R.id.animationView)
@@ -50,12 +48,6 @@ class OrdersFragment : Fragment() {
 
         bl = BusinessHandler(view.context)
         orderProduct = bl.readProductOrders()
-//        orderProduct = ViewModelProvider(this)[OrderModel::class.java]
-//        orderProduct = arrayListOf()
-//        orderProduct.add(OrdersModel(orderNumber = 12))
-//        orderProduct.add(OrdersModel(orderNumber = 13))
-//        orderProduct.add(OrdersModel(orderNumber = 14))
-//        orderProduct.add(OrdersModel(orderNumber = 15))
 
         orderRecView = view.findViewById(R.id.orders_recycler_view)
         orderRecView.layoutManager = LinearLayoutManager(context,
@@ -103,6 +95,5 @@ class OrdersFragment : Fragment() {
 
         return view
     }
-
 
 }
