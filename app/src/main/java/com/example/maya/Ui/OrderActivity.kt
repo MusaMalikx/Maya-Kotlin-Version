@@ -3,9 +3,12 @@ package com.example.maya.Ui
 import android.os.Bundle
 import android.view.WindowManager
 import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.maya.Bl.BusinessHandler
 import com.example.maya.R
 import com.example.maya.Ui.Adapters.CartAdapter
 import com.example.maya.Ui.Adapters.OrderAdapter
@@ -15,9 +18,13 @@ import com.example.maya.Ui.Models.ProductModel
 class OrderActivity : AppCompatActivity() {
 
     lateinit var orderRecView: RecyclerView
-    lateinit var orderProduct: ArrayList<OrderModel>
+    lateinit var orderProduct: MutableList<OrderModel>
     lateinit var orderAdapter: OrderAdapter
     lateinit var backArrow: ImageView
+    lateinit var totalPrice: TextView
+
+    lateinit var order_id: String
+    lateinit var bl: BusinessHandler
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,14 +34,21 @@ class OrderActivity : AppCompatActivity() {
 
         orderRecView = findViewById(R.id.order_recycler_view)
         backArrow = findViewById(R.id.order_backarrow)
+        totalPrice = findViewById(R.id.total_order_price)
 
-        orderProduct = arrayListOf()
-        orderProduct.add(OrderModel("Coat", 12, 123, R.drawable.twelve))
+        bl = BusinessHandler(this)
+
+        order_id = intent.getStringExtra("order_id").toString()
+        Toast.makeText(this, order_id, Toast.LENGTH_SHORT).show()
+
+        orderProduct = bl.readProductOrder(order_id)
+        totalPrice.text = bl.getOrderTotal(order_id).toString()
+//        orderProduct.add(OrderModel("Coat", "", 12, 123, R.drawable.twelve))
 
         orderRecView.layoutManager = LinearLayoutManager(this,
             LinearLayoutManager.VERTICAL, false)
         orderRecView.setHasFixedSize(true)
-        orderAdapter = OrderAdapter(orderProduct, this )
+        orderAdapter = OrderAdapter(orderProduct, this)
         orderRecView.adapter = orderAdapter
 
         backArrow.setOnClickListener {

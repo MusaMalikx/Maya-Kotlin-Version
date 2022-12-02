@@ -75,7 +75,7 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/total_price"
+            android:id="@+id/total_order_price"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

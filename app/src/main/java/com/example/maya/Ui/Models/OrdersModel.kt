@@ -5,6 +5,6 @@ import java.io.Serializable
 
 data class OrdersModel(
     val productId: String = "",
-    val orderNumber: Number = 0,
+    val orderNumber: String = "",
 ): ViewModel(),  Serializable {
 }

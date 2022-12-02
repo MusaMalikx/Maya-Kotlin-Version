@@ -13,7 +13,7 @@ import com.example.maya.Ui.Models.OrdersModel
 import com.example.maya.Ui.OrderActivity
 import com.example.maya.Ui.ProductActivity
 
-class OrdersAdapter(private val orderList: ArrayList<OrdersModel>, context: Context): RecyclerView.Adapter<OrdersAdapter.ViewHolder>()  {
+class OrdersAdapter(private val orderList: MutableList<OrdersModel>, context: Context): RecyclerView.Adapter<OrdersAdapter.ViewHolder>()  {
 
     val ctx: Context = context
 
@@ -48,7 +48,7 @@ class OrdersAdapter(private val orderList: ArrayList<OrdersModel>, context: Cont
 
     private fun goOrdersPage(position: Int) {
         val intent = Intent(ctx , OrderActivity::class.java)
-        intent.putExtra("order", orderList[position])
+        intent.putExtra("order_id", orderList[position].orderNumber)
         ctx.startActivity(intent)
     }
 }

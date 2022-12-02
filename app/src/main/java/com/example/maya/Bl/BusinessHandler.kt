@@ -4,6 +4,8 @@ import android.content.Context
 import android.graphics.Bitmap
 import com.example.maya.Db.DatabaseHandler
 import com.example.maya.Ui.Models.CartModel
+import com.example.maya.Ui.Models.OrderModel
+import com.example.maya.Ui.Models.OrdersModel
 import com.example.maya.Ui.Models.ProductModel
 
 class BusinessHandler(val context: Context):BusinessHandlerInterface {
@@ -30,6 +32,10 @@ class BusinessHandler(val context: Context):BusinessHandlerInterface {
         return db.readProducts("saleProducts")
     }
 
+    override fun readSuggestedProducts(cat: String): MutableList<ProductModel> {
+        return db.readSuggestedProducts(cat)
+    }
+
     override fun insertCartProduct(c: Cart) {
         db.insertCartProduct(c)
     }
@@ -48,6 +54,22 @@ class BusinessHandler(val context: Context):BusinessHandlerInterface {
 
     override fun getCartTotal(): Int {
         return db.getCartTotal()
+    }
+
+    override fun insertProductOrder(o: OrderModel) {
+        db.insertProductOrder(o)
+    }
+
+    override fun readProductOrders(): MutableList<OrdersModel> {
+        return db.readProductOrders()
+    }
+
+    override fun readProductOrder(orderId: String): MutableList<OrderModel> {
+        return db.readProductOrder(orderId)
+    }
+
+    override fun getOrderTotal(orderId: String): Int {
+        return db.getOrderTotal(orderId)
     }
 
 }

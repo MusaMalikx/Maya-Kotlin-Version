@@ -1,6 +1,7 @@
 package com.example.maya.Ui.Fragments
 
 import android.opengl.Visibility
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 
@@ -12,6 +13,7 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 
@@ -23,8 +25,13 @@ import com.example.maya.Ui.Adapters.CartAdapter
 import com.example.maya.Ui.Adapters.ProductAdapter
 import com.example.maya.Ui.Libs.Firebase
 import com.example.maya.Ui.Models.CartModel
+import com.example.maya.Ui.Models.OrderModel
 import com.example.maya.Ui.Models.ProductModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import java.time.LocalDateTime
+import java.time.ZoneOffset
+import kotlin.math.abs
+import kotlin.random.Random
 
 class CartFragment : Fragment() {
 
@@ -51,6 +58,7 @@ class CartFragment : Fragment() {
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -76,7 +84,70 @@ class CartFragment : Fragment() {
         totalPrice.text = "$" + bl.getCartTotal()
 
         hideLayout()
+        Handle()
 
+        checkoutBtn.setOnClickListener {
+            checkoutListner(view)
+        }
+
+        return view
+    }
+
+    fun updateTotalPrice(){
+        totalPrice.text = "$" + bl.getCartTotal()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun checkoutListner(view: View){
+
+        val dialog = BottomSheetDialog(
+            view.context, R.style.BottomSheetDialogTheme
+        )
+
+        val bottomSheetView = LayoutInflater.from(view.context.applicationContext).inflate(
+            R.layout.fragment_order_confirmed,
+            view.findViewById<ConstraintLayout>(R.id.order_dialogue)
+        )
+
+        animationViewDialog = bottomSheetView.findViewById(R.id.animationViewDia)
+        successLayout = bottomSheetView.findViewById(R.id.success_layout)
+
+        animationViewDialog.playAnimation()
+        animationViewDialog.loop(true)
+        successLayout.visibility = View.GONE
+
+        val random = abs(Random(LocalDateTime.now().toEpochSecond(ZoneOffset.UTC)).nextLong()).toString()
+
+        for (p in cartProduct) {
+            bl.insertProductOrder(OrderModel(p.productName, random, p.productQuantity,p.productPrice.toInt(),p.productImage))
+        }
+        insertProducts(view)
+        updateTotalPrice()
+        hideLayout()
+        Handle()
+
+        Handler().postDelayed({
+            animationViewDialog.pauseAnimation()
+            animationViewDialog.visibility = View.GONE
+            successLayout.visibility = View.VISIBLE
+        }, 1500)
+
+        dialog.setContentView(bottomSheetView)
+        dialog.show()
+
+    }
+
+    private fun hideLayout(){
+        animationViewMain.playAnimation()
+        animationViewMain.loop(true)
+        checkoutBtn.visibility = View.GONE
+        cartRecView.visibility = View.GONE
+        bottomCartLayout.visibility = View.GONE
+        cartTotalText.visibility = View.GONE
+        animationViewMain.visibility = View.VISIBLE
+    }
+
+    private fun Handle(){
         Handler().postDelayed({
             showLayout()
             animationView.playAnimation()
@@ -100,56 +171,8 @@ class CartFragment : Fragment() {
                 animationView.pauseAnimation()
             }
         }, 2000)
-
-        checkoutBtn.setOnClickListener {
-            checkoutListner(view)
-        }
-
-        return view
     }
 
-    fun updateTotalPrice(){
-        totalPrice.text = "$" + bl.getCartTotal()
-    }
-
-    private fun checkoutListner(view: View){
-
-        val dialog = BottomSheetDialog(
-            view.context, R.style.BottomSheetDialogTheme
-        )
-
-        val bottomSheetView = LayoutInflater.from(view.context.applicationContext).inflate(
-            R.layout.fragment_order_confirmed,
-            view.findViewById<ConstraintLayout>(R.id.order_dialogue)
-        )
-
-        animationViewDialog = bottomSheetView.findViewById(R.id.animationViewDia)
-        successLayout = bottomSheetView.findViewById(R.id.success_layout)
-
-        animationViewDialog.playAnimation()
-        animationViewDialog.loop(true)
-        successLayout.visibility = View.GONE
-
-        Handler().postDelayed({
-            animationViewDialog.pauseAnimation()
-            animationViewDialog.visibility = View.GONE
-            successLayout.visibility = View.VISIBLE
-        }, 1500)
-
-        dialog.setContentView(bottomSheetView)
-        dialog.show()
-
-    }
-
-    private fun hideLayout(){
-        animationViewMain.playAnimation()
-        animationViewMain.loop(true)
-        checkoutBtn.visibility = View.GONE
-        cartRecView.visibility = View.GONE
-        bottomCartLayout.visibility = View.GONE
-        cartTotalText.visibility = View.GONE
-        animationViewMain.visibility = View.VISIBLE
-    }
     private fun showLayout(){
         animationViewMain.visibility = View.GONE
         animationViewMain.playAnimation()
@@ -168,51 +191,6 @@ class CartFragment : Fragment() {
         cartRecView.setHasFixedSize(true)
         cartAdapter = CartAdapter(cartProduct, view.context, this@CartFragment )
         cartRecView.adapter = cartAdapter
-//        val p1 = CartModel(
-//            "Coat",
-//            "1",
-//            "231",
-//            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea co",
-//            0.0F,
-//            "0",
-//            false,
-//            "levis",
-//            R.drawable.eight,
-//            "Coats",
-//            "Best of the best stichings"
-//        )
-//        val p2 = CartModel(
-//            "Coat",
-//            "1",
-//            "231",
-//            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea co",
-//            0.0F,
-//            "0",
-//            false,
-//            "levis",
-//            R.drawable.seven,
-//            "Coats",
-//            "Best of the best stichings",
-//            12
-//        )
-//        val p3 = CartModel(
-//            "Coat",
-//            "1",
-//            "231",
-//            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea co",
-//            0.0F,
-//            "0",
-//            false,
-//            "levis",
-//            R.drawable.six,
-//            "Coats",
-//            "Best of the best stichings",
-//            4
-//        )
-//        cartProduct.add(p1)
-//        cartProduct.add(p2)
-//        cartProduct.add(p3)
-//        cartProduct.add(p1)
     }
 
 }

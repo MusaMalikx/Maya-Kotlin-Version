@@ -19,7 +19,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class ProductActivity: AppCompatActivity(), View.OnClickListener {
 
-    lateinit var recommendProduct:ArrayList<ProductModel>
+    lateinit var recommendProduct:MutableList<ProductModel>
     lateinit var recommendProductAdapter: ProductAdapter
     lateinit var recommendRecView: RecyclerView
 
@@ -64,7 +64,9 @@ class ProductActivity: AppCompatActivity(), View.OnClickListener {
         productDes.text = product.productDes
         productRating.rating = product.productRating
 
-        insertProducts()
+//        insertProducts()
+
+        recommendProduct = bl.readSuggestedProducts(product.productCategory)
 
         recommendRecView.layoutManager = LinearLayoutManager(this,
             LinearLayoutManager.HORIZONTAL, false)

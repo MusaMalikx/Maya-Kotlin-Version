@@ -15,7 +15,7 @@ import com.example.maya.Ui.Models.OrdersModel
 import com.example.maya.Ui.Models.ProductModel
 
 private val DATABASE_NAME = "MAYA_DB"
-private val DB_Version = 15
+private val DB_Version = 16
 
 class DatabaseHandler(val context:Context): DatabaseHandlerInterface, SQLiteOpenHelper(context, DATABASE_NAME, null, DB_Version)  {
 
@@ -29,6 +29,7 @@ class DatabaseHandler(val context:Context): DatabaseHandlerInterface, SQLiteOpen
     private val COL_IMAGE = "image"
     private val COL_ID = "id"
     private val COL_USER_ID = "userid"
+    private val COL_ORDER_ID = "orderid"
     private val COL_QUANTITY = "quant"
     private val COL_NAME = "name"
     private val COL_RATING = "rating"
@@ -64,7 +65,13 @@ class DatabaseHandler(val context:Context): DatabaseHandlerInterface, SQLiteOpen
             COL_IMAGE + " INTEGER)";
 
     private val createOrdersTable = "CREATE TABLE " + ORDER_TABLE_NAME + " (" +
-            COL_ID + " INTEGER PRIMARY KEY)";
+            COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+            COL_ORDER_ID + " TEXT," +
+            COL_USER_ID + " TEXT," +
+            COL_NAME + " TEXT," +
+            COL_QUANTITY + " INTEGER," +
+            COL_PRICE + " INTEGER," +
+            COL_IMAGE + " INTEGER)";
 
     override fun onCreate(db: SQLiteDatabase?) {
         db?.execSQL(createLanscapeTable)
@@ -177,6 +184,43 @@ class DatabaseHandler(val context:Context): DatabaseHandlerInterface, SQLiteOpen
         return list
     }
 
+    @SuppressLint("Range")
+    override fun readSuggestedProducts(cat: String): MutableList<ProductModel> {
+        val list: MutableList<ProductModel> = arrayListOf()
+        val db = this.readableDatabase
+        val query = "Select * from " + PRODUCT_TABLE_NAME + " where " + COL_CATEGORY + " = " + "'"+ cat + "'"
+        val result = db.rawQuery(query, null)
+
+        if (result.moveToFirst()){
+            do{
+                val id = result.getString(result.getColumnIndex(COL_ID))
+                val name = result.getString(result.getColumnIndex(COL_NAME))
+                val desc = result.getString(result.getColumnIndex(COL_DESC))
+                val discount = result.getString(result.getColumnIndex(COL_DISCOUNT))
+                val bool = result.getString(result.getColumnIndex(COL_HAVE)).toInt()
+                val category = result.getString(result.getColumnIndex(COL_CATEGORY))
+                val note = result.getString(result.getColumnIndex(COL_NOTE))
+                val rating = result.getString(result.getColumnIndex(COL_RATING))
+                val price = result.getString(result.getColumnIndex(COL_PRICE))
+                val image = result.getString(result.getColumnIndex(COL_IMAGE)).toInt()
+                val brand = result.getString(result.getColumnIndex(COL_BRAND))
+
+                var have = false
+                if(bool == 1){
+                    have = true
+                }
+
+                val item = ProductModel(name, id, price, desc, rating.toFloat(), discount, have, brand, image, category, note)
+                list.add(item)
+
+            }while (result.moveToNext())
+        }
+
+        result.close()
+        db.close()
+        return list
+    }
+
     override fun insertCartProduct(c: Cart) {
         val db = this.writableDatabase
         var cv = ContentValues()
@@ -256,6 +300,14 @@ class DatabaseHandler(val context:Context): DatabaseHandlerInterface, SQLiteOpen
         db.close()
     }
 
+    override fun deleteUserCart() {
+        val db = this.writableDatabase
+        db.delete(CART_TABLE_NAME,  COL_USER_ID + "= '" + Firebase.firebaseAuth.currentUser!!.uid + "'", null)
+//        db.delete(CART_TABLE_NAME, COL_ID + "=?", arrayOf(id) )
+//        Toast.makeText(context, "Cart Item Removed!", Toast.LENGTH_SHORT).show()
+        db.close()
+    }
+
     override fun getCartTotal(): Int {
         val data = readCartProducts()
         var total = 0
@@ -266,19 +318,92 @@ class DatabaseHandler(val context:Context): DatabaseHandlerInterface, SQLiteOpen
         return total
     }
 
-    override fun insertProductOrder(o: OrdersModel) {
+    override fun insertProductOrder(o: OrderModel) {
         val db = this.writableDatabase
         var cv = ContentValues()
-//        cv.put(COL_ID, o.orderNumber.toString())
-        var result = db.insert(ORDER_TABLE_NAME, null, cv)
+        cv.put(COL_ORDER_ID, o.order_id)
+        cv.put(COL_USER_ID, Firebase.firebaseAuth.currentUser!!.uid)
+        cv.put(COL_NAME, o.order_name)
+        cv.put(COL_PRICE, o.order_price)
+        cv.put(COL_IMAGE, o.order_image)
+        cv.put(COL_QUANTITY, o.order_quantity)
 
-        if (result == -1.toLong() )
-            Toast.makeText(context, "Failed to Insert Order", Toast.LENGTH_SHORT).show()
-        else
-            Toast.makeText(context, "Order successfully inserted", Toast.LENGTH_SHORT).show()
+            var result = db.insert(ORDER_TABLE_NAME, null, cv)
+
+            if (result == -1.toLong() )
+                Toast.makeText(context, "Products Order Insertion Failed", Toast.LENGTH_SHORT).show()
+            else
+                Toast.makeText(context, "Products Order Inserted Successfully", Toast.LENGTH_SHORT).show()
+
+        deleteUserCart()
+
     }
 
+    @SuppressLint("Range")
     override fun readProductOrders(): MutableList<OrdersModel> {
-        TODO("Not yet implemented")
+        val list: MutableList<OrdersModel> = arrayListOf()
+        val db = this.readableDatabase
+        val Query =
+            "Select * from " + ORDER_TABLE_NAME + " where " + COL_USER_ID + " = " + "'" + Firebase.firebaseAuth.currentUser!!.uid + "'"
+        val result = db.rawQuery(Query, null)
+//        println(userId)
+
+        var temp: MutableList<String> = arrayListOf()
+
+        if (result.moveToFirst()){
+            do{
+                val order_id = result.getString(result.getColumnIndex(COL_ORDER_ID))
+
+                if(!(order_id in temp)){
+                    val item = OrdersModel(orderNumber = order_id)
+                    list.add(item)
+                }
+
+                temp.add(order_id)
+
+
+            }while (result.moveToNext())
+        }
+
+        result.close()
+        db.close()
+        return list
+    }
+
+    @SuppressLint("Range")
+    override fun readProductOrder(orderId: String): MutableList<OrderModel> {
+        val list: MutableList<OrderModel> = arrayListOf()
+        val db = this.readableDatabase
+        val Query =
+            "Select * from " + ORDER_TABLE_NAME + " where " + COL_ORDER_ID + "= '" + orderId + "' AND " + COL_USER_ID + " = " + "'" + Firebase.firebaseAuth.currentUser!!.uid + "'"
+        val result = db.rawQuery(Query, null)
+
+        if (result.moveToFirst()){
+            do{
+                val name = result.getString(result.getColumnIndex(COL_NAME))
+                val price = result.getString(result.getColumnIndex(COL_PRICE)).toInt()
+                val image = result.getString(result.getColumnIndex(COL_IMAGE)).toInt()
+                val quantity = result.getString(result.getColumnIndex(COL_QUANTITY)).toInt()
+
+                val item = OrderModel(name, orderId, quantity, price, image)
+                list.add(item)
+
+
+            }while (result.moveToNext())
+        }
+
+        result.close()
+        db.close()
+        return list
+    }
+
+    override fun getOrderTotal(orderId: String): Int {
+        val data = readProductOrder(orderId)
+        var total = 0
+        for(i in 0..(data.size-1)){
+            total += data.get(i).order_price * data.get(i).order_quantity
+        }
+
+        return total
     }
 }

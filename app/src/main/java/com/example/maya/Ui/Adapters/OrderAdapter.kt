@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide
 import com.example.maya.R
 import com.example.maya.Ui.Models.OrderModel
 
-class OrderAdapter(private val orderList: ArrayList<OrderModel>, context: Context): RecyclerView.Adapter<OrderAdapter.ViewHolder>()  {
+class OrderAdapter(private val orderList: MutableList<OrderModel>, context: Context): RecyclerView.Adapter<OrderAdapter.ViewHolder>()  {
 
     val ctx: Context = context
 

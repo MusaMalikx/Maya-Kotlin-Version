@@ -13,6 +13,7 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
+import com.example.maya.Bl.BusinessHandler
 import com.example.maya.R
 import com.example.maya.Ui.Adapters.OrdersAdapter
 import com.example.maya.Ui.Models.OrdersModel
@@ -24,12 +25,14 @@ class OrdersFragment : Fragment() {
     lateinit var animationViewMain: LottieAnimationView
     lateinit var emptyOrderMsgLayout : LinearLayout
 
-    lateinit var orderProduct: ArrayList<OrdersModel>
+    lateinit var orderProduct: MutableList<OrdersModel>
     lateinit var orderAdapter: OrdersAdapter
     lateinit var orderRecView: RecyclerView
 
     lateinit var orderText: TextView
     lateinit var orderCard:CardView
+
+    lateinit var bl: BusinessHandler
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,12 +48,14 @@ class OrdersFragment : Fragment() {
         orderText = view.findViewById(R.id.order_text)
         orderCard = view.findViewById(R.id.orders_card)
 
+        bl = BusinessHandler(view.context)
+        orderProduct = bl.readProductOrders()
 //        orderProduct = ViewModelProvider(this)[OrderModel::class.java]
-        orderProduct = arrayListOf()
-        orderProduct.add(OrdersModel(orderNumber = 12))
-        orderProduct.add(OrdersModel(orderNumber = 13))
-        orderProduct.add(OrdersModel(orderNumber = 14))
-        orderProduct.add(OrdersModel(orderNumber = 15))
+//        orderProduct = arrayListOf()
+//        orderProduct.add(OrdersModel(orderNumber = 12))
+//        orderProduct.add(OrdersModel(orderNumber = 13))
+//        orderProduct.add(OrdersModel(orderNumber = 14))
+//        orderProduct.add(OrdersModel(orderNumber = 15))
 
         orderRecView = view.findViewById(R.id.orders_recycler_view)
         orderRecView.layoutManager = LinearLayoutManager(context,
