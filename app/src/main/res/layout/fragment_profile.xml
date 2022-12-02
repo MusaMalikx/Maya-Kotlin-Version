@@ -36,13 +36,13 @@
             app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
 
-        <ImageView
-            android:id="@+id/searchIv_ProfileFrag"
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            android:src="@drawable/ic_search"
-            app:tint="@color/mainText"
-            />
+<!--        <ImageView-->
+<!--            android:id="@+id/searchIv_ProfileFrag"-->
+<!--            android:layout_width="22dp"-->
+<!--            android:layout_height="22dp"-->
+<!--            android:src="@drawable/ic_search"-->
+<!--            app:tint="@color/mainText"-->
+<!--            />-->
 
     </LinearLayout>
 
@@ -69,7 +69,7 @@
 
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profileImage_profileFrag"
+            android:id="@+id/profile_image"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:src="@drawable/ic_profile"
@@ -85,7 +85,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/profileName_profileFrag"
+                android:id="@+id/profile_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/metropolis_regular"
@@ -94,7 +94,7 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/profileEmail_profileFrag"
+                android:id="@+id/profile_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/metropolis_regular"
@@ -106,13 +106,12 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/uploadImage_profileFrag"
-            android:layout_marginTop="20dp"
+            android:id="@+id/upload_image"
             android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_width="match_parent"
-            android:visibility="gone"
             android:layout_height="50dp"
-            android:background="@drawable/btn_bg"
             android:text="Upload Image"
             android:fontFamily="@font/metropolis_regular"/>
 

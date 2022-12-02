@@ -104,12 +104,8 @@ class DatabaseHandler(val context:Context): DatabaseHandlerInterface, SQLiteOpen
             do{
                 val image = result.getString(result.getColumnIndex(COL_IMAGE)).toInt()
                 list.add(image)
-//                println(image)
             }while (result.moveToNext())
         }
-
-        if (list != null )
-            Toast.makeText(context, "Images read successfully", Toast.LENGTH_SHORT).show()
 
         result.close()
         db.close()

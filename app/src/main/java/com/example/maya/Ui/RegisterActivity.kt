@@ -3,14 +3,17 @@ package com.example.maya.Ui
 import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import android.util.Log
-import android.widget.EditText
 import com.example.maya.R
 import com.example.maya.Ui.Libs.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.UserProfileChangeRequest
+
 
 class RegisterActivity: AppCompatActivity() {
 
@@ -80,8 +83,16 @@ class RegisterActivity: AppCompatActivity() {
             .addOnCompleteListener{ task ->
                 if (task.isSuccessful) {
                     progressDialog.setMessage("Save User Data")
+                    val user = FirebaseAuth.getInstance().currentUser
+
+                    val profileUpdates =
+                        UserProfileChangeRequest.Builder().setDisplayName(fullname.text.toString()).build()
+
+                    user!!.updateProfile(profileUpdates)
+
                    val intent = Intent(this, HomeActivity::class.java)
                     startActivity(intent)
+                    progressDialog.dismiss()
                     finish()
 
                 } else {
