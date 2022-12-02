@@ -24,7 +24,7 @@ import com.example.maya.Ui.Models.ProductModel
 class HomeFragment: Fragment() {
 
     lateinit var newProduct:MutableList<ProductModel>
-    lateinit var saleProduct:ArrayList<ProductModel>
+    lateinit var saleProduct:MutableList<ProductModel>
     lateinit var newProductAdapter: ProductAdapter
     lateinit var saleProductAdapter: ProductAdapter
     lateinit var newRecView:RecyclerView
@@ -58,7 +58,7 @@ class HomeFragment: Fragment() {
         bl = BusinessHandler(view.context)
 
         initializingCarousel(view)
-        insertProducts()
+//        insertProducts()
         initializingNewProducts()
         initializingSaleProducts()
 
@@ -91,6 +91,7 @@ class HomeFragment: Fragment() {
     }
 
     fun initializingSaleProducts(){
+        saleProduct = bl.readSaleProducts()
         saleRecView.layoutManager = LinearLayoutManager(context,
             LinearLayoutManager.HORIZONTAL, false)
         saleRecView.setHasFixedSize(true)

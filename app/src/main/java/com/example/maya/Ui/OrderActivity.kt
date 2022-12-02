@@ -29,10 +29,7 @@ class OrderActivity : AppCompatActivity() {
         backArrow = findViewById(R.id.order_backarrow)
 
         orderProduct = arrayListOf()
-        orderProduct.add(OrderModel("Coat", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea co", 12, 123, R.drawable.twelve))
-        orderProduct.add(OrderModel("Coat", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea co", 12, 123, R.drawable.twelve))
-        orderProduct.add(OrderModel("Coat", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea co", 12, 123, R.drawable.twelve))
-        orderProduct.add(OrderModel("Coat", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea co", 12, 123, R.drawable.twelve))
+        orderProduct.add(OrderModel("Coat", 12, 123, R.drawable.twelve))
 
         orderRecView.layoutManager = LinearLayoutManager(this,
             LinearLayoutManager.VERTICAL, false)

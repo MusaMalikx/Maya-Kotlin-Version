@@ -72,7 +72,7 @@ class LoginActivity: AppCompatActivity(),View.OnClickListener {
             .addOnCompleteListener{ task ->
                 if (task.isSuccessful) {
                     progressDialog.setMessage("Logged in User Data")
-                    Toast.makeText(this, "Signed in successfully", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, Firebase.firebaseAuth.currentUser!!.uid, Toast.LENGTH_SHORT).show()
                     val intent = Intent(this, HomeActivity::class.java)
                     startActivity(intent)
                     progressDialog.dismiss()
