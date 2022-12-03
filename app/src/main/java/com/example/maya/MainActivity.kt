@@ -1,12 +1,15 @@
 package com.example.maya
 
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.example.maya.Bl.BusinessHandler
 import com.example.maya.Bl.Product
+import com.example.maya.Ui.AirplaneModeChangeReceiver
 import com.example.maya.Ui.LoginActivity
+import com.example.maya.Ui.Receivers
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
@@ -15,9 +18,9 @@ class MainActivity : AppCompatActivity() {
 
     private val bl = BusinessHandler(this)
     private lateinit var mAdView: AdView
-//    private val mAppUnitId: String by lazy {
-//        "ca-app-pub-4504866837840100~7011174095"
-//    }
+
+    lateinit var receiver: AirplaneModeChangeReceiver
+    val myBroadcastReceiver: Receivers = Receivers()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +29,7 @@ class MainActivity : AppCompatActivity() {
         val btn_start = findViewById<Button>(R.id.btn_start)
 
         mAdView = findViewById(R.id.adView)
+        receiver = AirplaneModeChangeReceiver()
 
         initializeBannerAd()
 
@@ -40,8 +44,17 @@ class MainActivity : AppCompatActivity() {
             startActivity(myIntent)
         }
 
+        IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED).also {
+            registerReceiver(receiver, it)
+        }
+
     }
 
+//    override fun onStop() {
+//        super.onStop()
+//        unregisterReceiver(receiver)
+//        unregisterReceiver(myBroadcastReceiver)
+//    }
 
     fun initializeBannerAd() {
         MobileAds.initialize(this)

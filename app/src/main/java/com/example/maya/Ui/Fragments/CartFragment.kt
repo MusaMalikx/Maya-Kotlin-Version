@@ -1,5 +1,6 @@
 package com.example.maya.Ui.Fragments
 
+import android.content.Intent
 import android.opengl.Visibility
 import android.os.Build
 import android.os.Bundle
@@ -121,6 +122,7 @@ class CartFragment : Fragment() {
         for (p in cartProduct) {
             bl.insertProductOrder(OrderModel(p.productName, random, p.productQuantity,p.productPrice.toInt(),p.productImage))
         }
+//        sendOrderConfirmMessage()
         insertProducts(view)
         updateTotalPrice()
         hideLayout()
@@ -135,6 +137,14 @@ class CartFragment : Fragment() {
         dialog.setContentView(bottomSheetView)
         dialog.show()
 
+    }
+
+    private fun sendOrderConfirmMessage(){
+        val actionString = "com.malik.message.ordernotification"
+        val broadCastIntent = Intent(actionString)
+        broadCastIntent.putExtra("message", "${Firebase.firebaseAuth.currentUser?.displayName} your order has confirmed!")
+        broadCastIntent.setFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES)
+        activity?.sendBroadcast(broadCastIntent)
     }
 
     private fun hideLayout(){

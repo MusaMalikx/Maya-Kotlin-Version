@@ -3,6 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.maya">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <permission android:name="android.permission.MEDIA_CONTENT_CONTROL" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -14,10 +22,9 @@
         android:theme="@style/Theme.Maya"
         tools:targetApi="31">
 
-                <!-- Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713 -->
-                <meta-data
-                    android:name="com.google.android.gms.ads.APPLICATION_ID"
-                    android:value="ca-app-pub-4504866837840100~7011174095"/>
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-4504866837840100~7011174095" />
 
         <activity
             android:name=".Ui.OrderActivity"
@@ -33,6 +40,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <receiver android:name=".Ui.NotificationReceiver"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="com.malik.message.ordernotification" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".Ui.MediaService"/>
         <activity android:name=".Ui.HomeActivity" />
         <activity android:name=".Ui.ProductActivity" />
         <activity android:name=".Ui.LoginActivity" />

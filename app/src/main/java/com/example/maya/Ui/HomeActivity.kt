@@ -5,10 +5,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.example.maya.Bl.BusinessHandler
 import com.example.maya.R
-import com.example.maya.Ui.Fragments.CartFragment
-import com.example.maya.Ui.Fragments.HomeFragment
-import com.example.maya.Ui.Fragments.OrdersFragment
-import com.example.maya.Ui.Fragments.ProfileFragment
+import com.example.maya.Ui.Fragments.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeActivity: AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
@@ -38,8 +35,14 @@ class HomeActivity: AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
                     .commit()
                 return true
             }
-            R.id.likeMenu -> {
+            R.id.ordersMenu -> {
                 val fragment = OrdersFragment()
+                supportFragmentManager.beginTransaction().replace(R.id.nav_fragment, fragment, fragment.javaClass.simpleName)
+                    .commit()
+                return true
+            }
+            R.id.musicMenu -> {
+                val fragment = MusicFragment()
                 supportFragmentManager.beginTransaction().replace(R.id.nav_fragment, fragment, fragment.javaClass.simpleName)
                     .commit()
                 return true

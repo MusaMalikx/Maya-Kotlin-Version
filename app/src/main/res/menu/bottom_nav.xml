@@ -10,9 +10,13 @@
         android:title="Cart"
         android:icon="@drawable/ic_shopping_cart"/>
     <item
-        android:id="@+id/likeMenu"
+        android:id="@+id/ordersMenu"
         android:title="Orders"
         android:icon="@drawable/ic_bag"/>
+    <item
+        android:id="@+id/musicMenu"
+        android:title="Music"
+        android:icon="@drawable/ic_outline_music_note_24"/>
     <item
         android:id="@+id/profileMenu"
         android:title="Profile"
