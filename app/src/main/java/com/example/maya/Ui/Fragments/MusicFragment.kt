@@ -55,8 +55,6 @@ class MusicFragment: Fragment() {
             handleStopClick()
         }
 
-        println(bool)
-
         if (bool == true){
             animationPlayView.pauseAnimation()
             animationPlayView.visibility = View.GONE

@@ -41,13 +41,6 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".Ui.NotificationReceiver"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="com.malik.message.ordernotification" />
-            </intent-filter>
-        </receiver>
-
         <service android:name=".Ui.MediaService"/>
         <activity android:name=".Ui.HomeActivity" />
         <activity android:name=".Ui.ProductActivity" />

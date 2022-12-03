@@ -139,14 +139,6 @@ class CartFragment : Fragment() {
 
     }
 
-    private fun sendOrderConfirmMessage(){
-        val actionString = "com.malik.message.ordernotification"
-        val broadCastIntent = Intent(actionString)
-        broadCastIntent.putExtra("message", "${Firebase.firebaseAuth.currentUser?.displayName} your order has confirmed!")
-        broadCastIntent.setFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES)
-        activity?.sendBroadcast(broadCastIntent)
-    }
-
     private fun hideLayout(){
         animationViewMain.playAnimation()
         animationViewMain.loop(true)
