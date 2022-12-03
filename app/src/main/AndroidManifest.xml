@@ -13,6 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Maya"
         tools:targetApi="31">
+
+                <!-- Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713 -->
+                <meta-data
+                    android:name="com.google.android.gms.ads.APPLICATION_ID"
+                    android:value="ca-app-pub-4504866837840100~7011174095"/>
+
         <activity
             android:name=".Ui.OrderActivity"
             android:exported="false"

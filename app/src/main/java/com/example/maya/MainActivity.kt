@@ -7,18 +7,29 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.maya.Bl.BusinessHandler
 import com.example.maya.Bl.Product
 import com.example.maya.Ui.LoginActivity
-import com.example.maya.Ui.Models.ProductModel
-import com.google.firebase.auth.FirebaseAuth
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 
 class MainActivity : AppCompatActivity() {
 
     private val bl = BusinessHandler(this)
+    private lateinit var mAdView: AdView
+//    private val mAppUnitId: String by lazy {
+//        "ca-app-pub-4504866837840100~7011174095"
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         val btn_start = findViewById<Button>(R.id.btn_start)
+
+        mAdView = findViewById(R.id.adView)
+
+        initializeBannerAd()
+
+        loadBannerAd()
 
 //        this.deleteDatabase("MAYA_DB")
 //        addingCarouselImages()
@@ -29,6 +40,16 @@ class MainActivity : AppCompatActivity() {
             startActivity(myIntent)
         }
 
+    }
+
+
+    fun initializeBannerAd() {
+        MobileAds.initialize(this)
+    }
+
+    fun loadBannerAd() {
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
     }
 
     fun addingProducts(){
