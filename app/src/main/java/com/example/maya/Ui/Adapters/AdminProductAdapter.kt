@@ -58,6 +58,7 @@ class AdminProductAdapter(private val prodList:MutableList<ProductModel>,context
         intent.putExtra("ProductIndex", position)
         intent.putExtra("ProductFrom", "New")
         intent.putExtra("product", prodList[position])
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         ctx.startActivity(intent)
     }
 

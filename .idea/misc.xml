@@ -40,7 +40,7 @@
         <entry key="app/src/main/res/drawable/menu_bg.xml" value="0.1155" />
         <entry key="app/src/main/res/drawable/new_product_bg.xml" value="0.1155" />
         <entry key="app/src/main/res/drawable/strock_bg.xml" value="0.1155" />
-        <entry key="app/src/main/res/layout/activity_admin_products.xml" value="0.12782294489611562" />
+        <entry key="app/src/main/res/layout/activity_admin_products.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_admin_users.xml" value="0.10095672607421875" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.12324676513671878" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.38748779296875" />

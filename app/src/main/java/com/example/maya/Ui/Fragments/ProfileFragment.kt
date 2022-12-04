@@ -1,13 +1,10 @@
 package com.example.maya.Ui.Fragments
 
 
-import android.R.attr
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.Handler
 import android.provider.MediaStore
@@ -49,7 +46,7 @@ class ProfileFragment : Fragment() {
 
     lateinit var linearLayout2:LinearLayout
     lateinit var linearLayout3:LinearLayout
-    lateinit var linearLayout4:LinearLayout
+    lateinit var adminLinearLayout4:LinearLayout
 
     lateinit var adminProducts: CardView
     lateinit var adminUsers: CardView
@@ -71,7 +68,7 @@ class ProfileFragment : Fragment() {
         animationView = view.findViewById(R.id.animationView)
         linearLayout2 = view.findViewById(R.id.linearLayout2)
         linearLayout3 = view.findViewById(R.id.linearLayout3)
-        linearLayout4 = view.findViewById(R.id.linearLayout4)
+        adminLinearLayout4 = view.findViewById(R.id.admin_linearLayout4)
         logout_btn = view.findViewById(R.id.logout_btn)
 
         profileName.text = Firebase.firebaseAuth.currentUser!!.displayName
@@ -128,6 +125,27 @@ class ProfileFragment : Fragment() {
         }
     }
 
+    private fun adminCheck(){
+        Firebase.firebaseDatabaseUsers.ref.child(Firebase.firebaseAuth.currentUser!!.uid)
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    val value: UserModel? = dataSnapshot.getValue(UserModel::class.java)
+//                    Toast.makeText(view?.context, ""+value?.admin, Toast.LENGTH_SHORT).show()
+                    if (value?.admin == true){
+                        adminLinearLayout4.visibility = View.VISIBLE
+                    }
+                    else {
+                        adminLinearLayout4.visibility = View.GONE
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+            })
+    }
+
+
     private fun uploadProfileImage(data: Intent){
         val bitmap = MediaStore.Images.Media.getBitmap(context?.contentResolver, data.data)
         profileImage.setImageBitmap(bitmap)
@@ -163,7 +181,7 @@ class ProfileFragment : Fragment() {
         animationView.loop(true)
         linearLayout2.visibility = View.GONE
         linearLayout3.visibility = View.GONE
-        linearLayout4.visibility = View.GONE
+        adminLinearLayout4.visibility = View.GONE
         logout_btn.visibility = View.GONE
         animationView.visibility = View.VISIBLE
     }
@@ -173,7 +191,8 @@ class ProfileFragment : Fragment() {
         logout_btn.visibility = View.VISIBLE
         linearLayout2.visibility = View.VISIBLE
         linearLayout3.visibility = View.VISIBLE
-        linearLayout4.visibility = View.VISIBLE
+//        adminLinearLayout4.visibility = View.VISIBLE
+        adminCheck()
     }
 
 }

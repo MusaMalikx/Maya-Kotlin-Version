@@ -14,6 +14,8 @@
         <!-- Customize your theme here. -->
         <item name="android:windowLightStatusBar" tools:targetApi="23">true</item>
 
+        <item name="android:editTextColor">@android:color/white</item>
+
     </style>
 
     <style name="BottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">

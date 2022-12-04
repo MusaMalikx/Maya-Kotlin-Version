@@ -41,6 +41,10 @@ class BusinessHandler(val context: Context):BusinessHandlerInterface {
         db.deleteProduct(id)
     }
 
+    override fun searchProduct(cat: String): MutableList<ProductModel> {
+        return db.searchProduct(cat)
+    }
+
     override fun insertCartProduct(c: Cart) {
         db.insertCartProduct(c)
     }

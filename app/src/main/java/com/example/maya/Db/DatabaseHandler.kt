@@ -272,6 +272,43 @@ class DatabaseHandler(val context:Context): DatabaseHandlerInterface, SQLiteOpen
         db.close()
     }
 
+    @SuppressLint("Range")
+    override fun searchProduct(cat: String) : MutableList<ProductModel> {
+        val list: MutableList<ProductModel> = arrayListOf()
+        val db = this.readableDatabase
+        val query = "Select * from " + PRODUCT_TABLE_NAME + " where " + COL_CATEGORY + " like " + "'%"+ cat + "%'"
+        val result = db.rawQuery(query, null)
+
+        if (result.moveToFirst()){
+            do{
+                val id = result.getString(result.getColumnIndex(COL_ID))
+                val name = result.getString(result.getColumnIndex(COL_NAME))
+                val desc = result.getString(result.getColumnIndex(COL_DESC))
+                val discount = result.getString(result.getColumnIndex(COL_DISCOUNT))
+                val bool = result.getString(result.getColumnIndex(COL_HAVE)).toInt()
+                val category = result.getString(result.getColumnIndex(COL_CATEGORY))
+                val note = result.getString(result.getColumnIndex(COL_NOTE))
+                val rating = result.getString(result.getColumnIndex(COL_RATING))
+                val price = result.getString(result.getColumnIndex(COL_PRICE))
+                val image = result.getString(result.getColumnIndex(COL_IMAGE)).toInt()
+                val brand = result.getString(result.getColumnIndex(COL_BRAND))
+
+                var have = false
+                if(bool == 1){
+                    have = true
+                }
+
+                val item = ProductModel(name, id, price, desc, rating.toFloat(), discount, have, brand, image, category, note)
+                list.add(item)
+
+            }while (result.moveToNext())
+        }
+
+        result.close()
+        db.close()
+        return list
+    }
+
     override fun insertCartProduct(c: Cart) {
         val db = this.writableDatabase
         var cv = ContentValues()
