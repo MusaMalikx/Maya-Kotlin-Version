@@ -9,8 +9,10 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.maya.Bl.BusinessHandler
 import com.example.maya.R
 import com.example.maya.Ui.Libs.Firebase
+import com.example.maya.Ui.Models.UserModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 
@@ -25,6 +27,8 @@ class RegisterActivity: AppCompatActivity() {
     lateinit var password: EditText
     lateinit var confirmPassword: EditText
 
+    lateinit var bl: BusinessHandler
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -32,6 +36,8 @@ class RegisterActivity: AppCompatActivity() {
         val login_click = findViewById<TextView>(R.id.login_click)
 
         progressDialog = ProgressDialog(this)
+
+        bl = BusinessHandler(this)
 
         fullname = findViewById(R.id.register_fullname)
         email = findViewById(R.id.register_email)
@@ -82,7 +88,7 @@ class RegisterActivity: AppCompatActivity() {
         Firebase.firebaseAuth.createUserWithEmailAndPassword(email.text.toString(), password.text.toString())
             .addOnCompleteListener{ task ->
                 if (task.isSuccessful) {
-                    progressDialog.setMessage("Save User Data")
+//                    progressDialog.setMessage("Save User Data")
                     val user = FirebaseAuth.getInstance().currentUser
 
                     val profileUpdates =
@@ -90,10 +96,24 @@ class RegisterActivity: AppCompatActivity() {
 
                     user!!.updateProfile(profileUpdates)
 
-                   val intent = Intent(this, HomeActivity::class.java)
-                    startActivity(intent)
-                    progressDialog.dismiss()
-                    finish()
+                    //bl.insertUser(UserModel(fullname.text.toString(), Firebase.firebaseAuth.currentUser!!.uid, email.text.toString()))
+
+                    Firebase.firebaseDatabaseUsers.child(Firebase.firebaseAuth.currentUser!!.uid).setValue(UserModel(fullname.text.toString(), Firebase.firebaseAuth.currentUser!!.uid, email.text.toString())).addOnSuccessListener {
+                        progressDialog.setMessage("Save User Data")
+                        Toast.makeText(this, "Firebase Signing up Success!", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this, HomeActivity::class.java)
+                        startActivity(intent)
+                        progressDialog.dismiss()
+                        finish()
+                    }
+                        .addOnFailureListener{
+                            Toast.makeText(this, "Firebase Signing up Failed!", Toast.LENGTH_SHORT).show()
+                        }
+
+//                   val intent = Intent(this, HomeActivity::class.java)
+//                    startActivity(intent)
+//                    progressDialog.dismiss()
+//                    finish()
 
                 } else {
                     progressDialog.dismiss()

@@ -3,10 +3,7 @@ package com.example.maya.Bl
 import android.content.Context
 import android.graphics.Bitmap
 import com.example.maya.Db.DatabaseHandler
-import com.example.maya.Ui.Models.CartModel
-import com.example.maya.Ui.Models.OrderModel
-import com.example.maya.Ui.Models.OrdersModel
-import com.example.maya.Ui.Models.ProductModel
+import com.example.maya.Ui.Models.*
 
 class BusinessHandler(val context: Context):BusinessHandlerInterface {
 
@@ -34,6 +31,14 @@ class BusinessHandler(val context: Context):BusinessHandlerInterface {
 
     override fun readSuggestedProducts(cat: String, id: String): MutableList<ProductModel> {
         return db.readSuggestedProducts(cat, id)
+    }
+
+    override fun readAllProducts(): MutableList<ProductModel> {
+        return db.readAllProducts()
+    }
+
+    override fun deleteProduct(id: String) {
+        db.deleteProduct(id)
     }
 
     override fun insertCartProduct(c: Cart) {
@@ -70,6 +75,14 @@ class BusinessHandler(val context: Context):BusinessHandlerInterface {
 
     override fun getOrderTotal(orderId: String): Int {
         return db.getOrderTotal(orderId)
+    }
+
+    override fun insertUser(user: UserModel) {
+        db.insertUser(user)
+    }
+
+    override fun readUser(): MutableList<UserModel> {
+        return db.readUser()
     }
 
 }

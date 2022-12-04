@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    >
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="3dp"
+        app:cardBackgroundColor="@color/backgroundAd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <LinearLayout
+            android:id="@+id/layoutmain"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            >
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/user_picture"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="30dp"
+                android:src="@drawable/ic_profile"
+                app:civ_border_color="@color/black"
+                app:tint="@color/mainText"
+                />
+
+<!--            <ImageView-->
+<!--                android:id="@+id/user_picture"-->
+<!--                android:layout_width="120dp"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:src="@drawable/ic_visual_search"-->
+<!--                android:scaleType="centerCrop"/>-->
+
+            <LinearLayout
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="30dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <TextView
+                    android:id="@+id/admin_user_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    android:fontFamily="@font/metropolis_semibold"
+                    android:maxEms="12"
+                    android:maxLines="1"
+                    android:text="User Name"
+                    android:textAllCaps="true"
+                    android:textAlignment="center"
+                    android:textColor="@color/mainText"
+                    android:textSize="22sp" />
+                <TextView
+                    android:id="@+id/admin_user_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="24dp"
+                    android:fontFamily="@font/metropolis_semibold"
+                    android:maxEms="12"
+                    android:maxLines="1"
+                    android:text="Email"
+                    android:textAlignment="center"
+                    android:textColor="@color/mainText"
+                    android:textSize="16sp" />
+<!--                <Button-->
+<!--                    android:id="@+id/user_delete_btn"-->
+<!--                    android:layout_width="fill_parent"-->
+<!--                    android:layout_height="48dp"-->
+<!--                    android:layout_marginLeft="20dp"-->
+<!--                    android:layout_marginTop="8dp"-->
+<!--                    android:layout_marginRight="15dp"-->
+<!--                    android:elevation="10dp"-->
+<!--                    android:text="Delete"-->
+<!--                    android:textSize="16dp" />-->
+
+            </LinearLayout>
+
+
+            </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
+

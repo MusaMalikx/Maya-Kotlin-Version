@@ -1,6 +1,7 @@
 package com.example.maya.Ui.Fragments
 
 
+import android.R.attr
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
@@ -14,12 +15,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import com.airbnb.lottie.LottieAnimationView
-import com.example.maya.Bl.BusinessHandler
 import com.example.maya.R
+import com.example.maya.Ui.AdminProductActivity
+import com.example.maya.Ui.AdminUserActivity
 import com.example.maya.Ui.Libs.Firebase
 import com.example.maya.Ui.LoginActivity
+import com.example.maya.Ui.MediaService
+import com.example.maya.Ui.Models.UserModel
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.StorageReference
 import de.hdodenhof.circleimageview.CircleImageView
 import java.io.ByteArrayOutputStream
@@ -43,6 +51,8 @@ class ProfileFragment : Fragment() {
     lateinit var linearLayout3:LinearLayout
     lateinit var linearLayout4:LinearLayout
 
+    lateinit var adminProducts: CardView
+    lateinit var adminUsers: CardView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,6 +77,9 @@ class ProfileFragment : Fragment() {
         profileName.text = Firebase.firebaseAuth.currentUser!!.displayName
         profileEmail.text = Firebase.firebaseAuth.currentUser!!.email
 
+        adminProducts = view.findViewById(R.id.admin_product_card)
+        adminUsers = view.findViewById(R.id.admin_user_card)
+
         downloadProfileImage()
 
         hideLayout()
@@ -76,6 +89,7 @@ class ProfileFragment : Fragment() {
         }, 2000)
 
         logout_btn.setOnClickListener {
+            activity?.stopService(Intent(view?.context, MediaService::class.java))
             Firebase.firebaseAuth.signOut()
             Toast.makeText(view.context, "Signed out successfully!", Toast.LENGTH_SHORT).show()
             startActivity(Intent(view.context, LoginActivity::class.java))
@@ -86,6 +100,14 @@ class ProfileFragment : Fragment() {
             intent.type = "image/*"
             intent.action = Intent.ACTION_GET_CONTENT
             startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1)
+        }
+
+        adminProducts.setOnClickListener {
+            startActivity(Intent(view.context, AdminProductActivity::class.java))
+        }
+
+        adminUsers.setOnClickListener {
+            startActivity(Intent(view.context, AdminUserActivity::class.java))
         }
 
         return view
@@ -116,7 +138,7 @@ class ProfileFragment : Fragment() {
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
         val data = baos.toByteArray()
 
-        var uploadTask = usersRef.putBytes(data)
+        val uploadTask = usersRef.putBytes(data)
         uploadTask.addOnFailureListener {
             Toast.makeText(view?.context, "Image Insertion to firebase Failed!", Toast.LENGTH_SHORT).show()
         }.addOnSuccessListener { taskSnapshot ->
@@ -132,7 +154,7 @@ class ProfileFragment : Fragment() {
         usersImageRef.getFile(localFile).addOnSuccessListener {
             profileImage.setImageBitmap(BitmapFactory.decodeFile(localFile.getAbsolutePath()))
         }.addOnFailureListener {
-            Toast.makeText(view?.context, "Not Found or Image Read from firebase error!", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(view?.context, "Not Found or Image Read from firebase error!", Toast.LENGTH_SHORT).show()
         }
     }
 

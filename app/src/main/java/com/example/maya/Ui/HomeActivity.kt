@@ -41,7 +41,7 @@ class HomeActivity: AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
                     .commit()
                 return true
             }
-            R.id.musicMenu -> {
+            R.id.vibeMenu -> {
                 val fragment = MusicFragment()
                 supportFragmentManager.beginTransaction().replace(R.id.nav_fragment, fragment, fragment.javaClass.simpleName)
                     .commit()

@@ -46,6 +46,9 @@
         <activity android:name=".Ui.ProductActivity" />
         <activity android:name=".Ui.LoginActivity" />
         <activity android:name=".Ui.RegisterActivity" />
+        <activity android:name=".Ui.AdminProductActivity" />
+        <activity android:name=".Ui.AdminUserActivity" />
+
     </application>
 
 </manifest>

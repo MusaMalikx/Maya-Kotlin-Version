@@ -27,12 +27,22 @@
             android:layout_marginBottom="20dp"
             />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="To PURIFY hearts"
+            android:fontFamily="@font/metropolis_regular"
+            android:textAlignment="center"
+            android:textSize="25sp"
+            android:layout_marginBottom="20dp"
+            />
+
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/animationMusic"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:visibility="gone"
-            app:lottie_rawRes="@raw/girl_listening_to_music" />
+            app:lottie_rawRes="@raw/muslim" />
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/animationPlay"

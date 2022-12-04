@@ -17,7 +17,7 @@ class MediaService : Service() {
 
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
 
-        player = MediaPlayer.create(this, Uri.parse("android.resource://com.example.maya/raw/labo_pe_naam"))
+        player = MediaPlayer.create(this, Uri.parse("android.resource://com.example.maya/raw/_055"))
 
         player.setLooping(true)
         player.start()

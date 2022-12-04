@@ -9,13 +9,10 @@ import android.widget.Toast
 import com.example.maya.Bl.Cart
 import com.example.maya.Bl.Product
 import com.example.maya.Ui.Libs.Firebase
-import com.example.maya.Ui.Models.CartModel
-import com.example.maya.Ui.Models.OrderModel
-import com.example.maya.Ui.Models.OrdersModel
-import com.example.maya.Ui.Models.ProductModel
+import com.example.maya.Ui.Models.*
 
 private val DATABASE_NAME = "MAYA_DB"
-private val DB_Version = 16
+private val DB_Version = 17
 
 class DatabaseHandler(val context:Context): DatabaseHandlerInterface, SQLiteOpenHelper(context, DATABASE_NAME, null, DB_Version)  {
 
@@ -23,12 +20,14 @@ class DatabaseHandler(val context:Context): DatabaseHandlerInterface, SQLiteOpen
     private val PRODUCT_TABLE_NAME  = "Product"
     private val CART_TABLE_NAME = "Cart"
     private val ORDER_TABLE_NAME = "Orders"
+    private val USER_TABLE_NAME = "Users"
 
     private val COL_DESC = "description"
     private val COL_PRICE = "price"
     private val COL_IMAGE = "image"
     private val COL_ID = "id"
     private val COL_USER_ID = "userid"
+    private val COL_EMAIL = "email"
     private val COL_ORDER_ID = "orderid"
     private val COL_QUANTITY = "quant"
     private val COL_NAME = "name"
@@ -73,11 +72,17 @@ class DatabaseHandler(val context:Context): DatabaseHandlerInterface, SQLiteOpen
             COL_PRICE + " INTEGER," +
             COL_IMAGE + " INTEGER)";
 
+    private val createUserTable = "CREATE TABLE " + USER_TABLE_NAME + " (" +
+            COL_USER_ID + " TEXT," +
+            COL_NAME + " TEXT," +
+            COL_EMAIL + " TEXT)";
+
     override fun onCreate(db: SQLiteDatabase?) {
         db?.execSQL(createLanscapeTable)
         db?.execSQL(createProductTable)
         db?.execSQL(createCartTable)
         db?.execSQL(createOrdersTable)
+        db?.execSQL(createUserTable)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, old: Int, new: Int) {
@@ -85,6 +90,7 @@ class DatabaseHandler(val context:Context): DatabaseHandlerInterface, SQLiteOpen
         db?.execSQL("DROP TABLE IF EXISTS Product");
         db?.execSQL("DROP TABLE IF EXISTS Cart");
         db?.execSQL("DROP TABLE IF EXISTS Orders");
+        db?.execSQL("DROP TABLE IF EXISTS Users");
         onCreate(db);
     }
 
@@ -221,6 +227,49 @@ class DatabaseHandler(val context:Context): DatabaseHandlerInterface, SQLiteOpen
         result.close()
         db.close()
         return list
+    }
+
+    @SuppressLint("Range")
+    override fun readAllProducts(): MutableList<ProductModel> {
+        val list: MutableList<ProductModel> = arrayListOf()
+        val db = this.readableDatabase
+        val query = "Select * from " + PRODUCT_TABLE_NAME
+        val result = db.rawQuery(query, null)
+
+        if (result.moveToFirst()){
+            do{
+                val id = result.getString(result.getColumnIndex(COL_ID))
+                val name = result.getString(result.getColumnIndex(COL_NAME))
+                val desc = result.getString(result.getColumnIndex(COL_DESC))
+                val discount = result.getString(result.getColumnIndex(COL_DISCOUNT))
+                val bool = result.getString(result.getColumnIndex(COL_HAVE)).toInt()
+                val category = result.getString(result.getColumnIndex(COL_CATEGORY))
+                val note = result.getString(result.getColumnIndex(COL_NOTE))
+                val rating = result.getString(result.getColumnIndex(COL_RATING))
+                val price = result.getString(result.getColumnIndex(COL_PRICE))
+                val image = result.getString(result.getColumnIndex(COL_IMAGE)).toInt()
+                val brand = result.getString(result.getColumnIndex(COL_BRAND))
+
+                var have = false
+                if(bool == 1){
+                    have = true
+                }
+
+                val item = ProductModel(name, id, price, desc, rating.toFloat(), discount, have, brand, image, category, note)
+                list.add(item)
+
+            }while (result.moveToNext())
+        }
+
+        result.close()
+        db.close()
+        return list
+    }
+
+    override fun deleteProduct(id: String) {
+        val db = this.writableDatabase
+        db.delete(PRODUCT_TABLE_NAME, COL_ID + "= '" + id + "'", null)
+        db.close()
     }
 
     override fun insertCartProduct(c: Cart) {
@@ -395,5 +444,42 @@ class DatabaseHandler(val context:Context): DatabaseHandlerInterface, SQLiteOpen
         }
 
         return total
+    }
+
+    override fun insertUser(u: UserModel) {
+        val db = this.writableDatabase
+        var cv = ContentValues()
+        cv.put(COL_USER_ID, u.userID)
+        cv.put(COL_NAME, u.userName)
+        cv.put(COL_EMAIL, u.userEmail)
+
+        var result = db.insert(USER_TABLE_NAME, null, cv)
+
+        if (result == -1.toLong() )
+            Toast.makeText(context, "User Registeration Failed", Toast.LENGTH_SHORT).show()
+        else
+            Toast.makeText(context, "User Registered Successfully", Toast.LENGTH_SHORT).show()
+    }
+
+    @SuppressLint("Range")
+    override fun readUser(): MutableList<UserModel> {
+        var list: MutableList<UserModel> = arrayListOf()
+        val db = this.readableDatabase
+        val query = "Select * from " + USER_TABLE_NAME
+        val result = db.rawQuery(query, null)
+
+        if (result.moveToFirst()){
+            do{
+                val uid = result.getString(result.getColumnIndex(COL_USER_ID))
+                val name = result.getString(result.getColumnIndex(COL_NAME))
+                val email = result.getString(result.getColumnIndex(COL_EMAIL))
+
+                list.add(UserModel(name, uid, email))
+            }while (result.moveToNext())
+        }
+
+        result.close()
+        db.close()
+        return list
     }
 }

@@ -9,4 +9,5 @@ import com.google.firebase.storage.StorageReference
 object Firebase {
     val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
     var firebaseStorage = FirebaseStorage.getInstance()
+    val firebaseDatabaseUsers = FirebaseDatabase.getInstance().getReference("Users")
 }

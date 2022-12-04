@@ -40,13 +40,18 @@
         <entry key="app/src/main/res/drawable/menu_bg.xml" value="0.1155" />
         <entry key="app/src/main/res/drawable/new_product_bg.xml" value="0.1155" />
         <entry key="app/src/main/res/drawable/strock_bg.xml" value="0.1155" />
+        <entry key="app/src/main/res/layout/activity_admin_products.xml" value="0.12782294489611562" />
+        <entry key="app/src/main/res/layout/activity_admin_users.xml" value="0.10095672607421875" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.12324676513671878" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.38748779296875" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_order.xml" value="0.22014465332031252" />
         <entry key="app/src/main/res/layout/activity_product.xml" value="0.37285156249999996" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.5197174072265626" />
+        <entry key="app/src/main/res/layout/admin_product.xml" value="0.14739583333333334" />
+        <entry key="app/src/main/res/layout/admin_user.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_add_to_cart.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_admin.xml" value="0.14739583333333334" />
         <entry key="app/src/main/res/layout/fragment_cart.xml" value="0.20819396972656257" />
         <entry key="app/src/main/res/layout/fragment_fav.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
@@ -54,7 +59,7 @@
         <entry key="app/src/main/res/layout/fragment_music.xml" value="0.18759918212890625" />
         <entry key="app/src/main/res/layout/fragment_order_confirmed.xml" value="0.24155403608729897" />
         <entry key="app/src/main/res/layout/fragment_orders.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.10052083333333334" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.30428619384765626" />
         <entry key="app/src/main/res/layout/item_carousel.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_cart.xml" value="0.2947916666666667" />
         <entry key="app/src/main/res/layout/item_order.xml" value="0.1" />

@@ -3,10 +3,7 @@ package com.example.maya.Db
 import android.graphics.Bitmap
 import com.example.maya.Bl.Cart
 import com.example.maya.Bl.Product
-import com.example.maya.Ui.Models.CartModel
-import com.example.maya.Ui.Models.OrderModel
-import com.example.maya.Ui.Models.OrdersModel
-import com.example.maya.Ui.Models.ProductModel
+import com.example.maya.Ui.Models.*
 
 interface DatabaseHandlerInterface {
     fun insertLandscapePic(img: Int)
@@ -14,6 +11,8 @@ interface DatabaseHandlerInterface {
     fun insertProduct(p: Product)
     fun readProducts(state: String) : MutableList<ProductModel>
     fun readSuggestedProducts(cat: String, id: String) : MutableList<ProductModel>
+    fun readAllProducts() : MutableList<ProductModel>
+    fun deleteProduct(id: String)
     fun insertCartProduct(c: Cart)
     fun readCartProducts() : MutableList<CartModel>
     fun updateCartQuantityProduct(id: String, quantity: Int)
@@ -24,4 +23,6 @@ interface DatabaseHandlerInterface {
     fun readProductOrders() : MutableList<OrdersModel>
     fun readProductOrder(orderId: String) : MutableList<OrderModel>
     fun getOrderTotal(orderId: String):Int
+    fun insertUser(user: UserModel)
+    fun readUser() : MutableList<UserModel>
 }
