@@ -50,7 +50,7 @@
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.38748779296875" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_order.xml" value="0.22014465332031252" />
-        <entry key="app/src/main/res/layout/activity_product.xml" value="0.10184631347656245" />
+        <entry key="app/src/main/res/layout/activity_product.xml" value="0.45293121337890624" />
         <entry key="app/src/main/res/layout/activity_product_landscape.xml" value="0.1507838283828383" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.5197174072265626" />
         <entry key="app/src/main/res/layout/admin_product.xml" value="0.14739583333333334" />
@@ -64,7 +64,7 @@
         <entry key="app/src/main/res/layout/fragment_music.xml" value="0.18759918212890625" />
         <entry key="app/src/main/res/layout/fragment_order_confirmed.xml" value="0.24155403608729897" />
         <entry key="app/src/main/res/layout/fragment_orders.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.30428619384765626" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.12802354344781838" />
         <entry key="app/src/main/res/layout/item_carousel.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_cart.xml" value="0.2947916666666667" />
         <entry key="app/src/main/res/layout/item_order.xml" value="0.1" />

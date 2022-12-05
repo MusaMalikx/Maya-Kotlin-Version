@@ -122,7 +122,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
+
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
         <androidx.cardview.widget.CardView
@@ -288,22 +288,70 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_rawRes="@raw/circle_progress" />
-<androidx.cardview.widget.CardView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:cardElevation="5dp"
-    android:background="@color/background"
-    >
-    <Button
-        android:id="@+id/logout_btn"
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/admin_card_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/btn_bg"
-        android:layout_margin="20dp"
-        android:elevation="10dp"
-        android:text="Logout"
-         />
-</androidx.cardview.widget.CardView>
+        android:background="@color/background"
+        app:cardElevation="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/cardView2"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end"
+            >
+
+        <Button
+            android:id="@+id/profile_btn_products"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:background="@drawable/btn_bg"
+            android:elevation="10dp"
+            android:text="+ P" />
+
+        <Button
+            android:id="@+id/profile_btn_carousel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:background="@drawable/btn_bg"
+            android:elevation="10dp"
+            android:text="+ C" />
+
+        <Button
+            android:id="@+id/profile_btn_del_db"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:background="@drawable/btn_bg"
+            android:elevation="10dp"
+            android:text="- D" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background"
+        app:cardElevation="5dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <Button
+            android:id="@+id/logout_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:background="@drawable/btn_bg"
+            android:elevation="10dp"
+            android:text="Logout" />
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
